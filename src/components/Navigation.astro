@@ -1,0 +1,66 @@
+---
+import { navigation } from '../data/navigation';
+import { getCollection } from 'astro:content';
+
+interface Props { pathname: string }
+const { pathname } = Astro.props;
+const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+const contentPages = await getCollection('pages');
+const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
+const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\//, '')) ?? fallback;
+---
+
+<nav aria-label="Hauptnavigation" class="hidden lg:block">
+  <ul class="flex items-start gap-8 xl:gap-11">
+    {navigation.map((item) => (
+      <li class="group relative">
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class="relative block py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink no-underline transition hover:text-[var(--nav-color)]"
+          style={`--nav-color: var(--color-${item.section})`}
+        >
+          <span
+            class:list={[
+              'absolute inset-x-0 top-0 h-0.5 origin-left bg-[var(--nav-color)] transition-transform',
+              isActive(item.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+            ]}
+          ></span>
+          {labelFor(item.href, item.label)}
+        </a>
+        {item.children && (
+          <ul class="invisible absolute left-0 top-full z-30 min-w-52 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            {item.children.map((child) => (
+              <li>
+                <a href={child.href} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-color)]">
+                  {labelFor(child.href, child.label)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<details class="relative lg:hidden">
+  <summary class="flex min-h-11 cursor-pointer list-none items-center gap-3 rounded-full border border-line px-4 text-sm font-bold uppercase tracking-[0.12em] [&::-webkit-details-marker]:hidden">
+    <span class="grid gap-1" aria-hidden="true"><span class="h-px w-5 bg-ink"></span><span class="h-px w-5 bg-ink"></span></span>
+    Menü
+  </summary>
+  <nav aria-label="Mobile Navigation" class="absolute right-0 top-14 z-40 w-[min(21rem,calc(100vw-2.5rem))] rounded-3xl border border-line bg-white p-5 shadow-2xl">
+    <ul class="space-y-1">
+      {navigation.map((item) => (
+        <li>
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined} class="block rounded-xl px-3 py-2 text-lg font-semibold text-ink no-underline hover:bg-paper">{labelFor(item.href, item.label)}</a>
+          {item.children && (
+            <ul class="mb-3 border-l border-line pl-3">
+              {item.children.map((child) => <li><a href={child.href} class="block px-3 py-1 text-sm text-muted no-underline hover:text-ink">{labelFor(child.href, child.label)}</a></li>)}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+</details>

@@ -1,0 +1,82 @@
+---
+import { getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Heading from '../components/Heading.astro';
+import Text from '../components/Text.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import portrait from '../assets/images/meike-fabian-portrait.jpg';
+
+const page = await getEntry('pages', 'home');
+if (!page) throw new Error('Startseiteninhalt fehlt.');
+const { Content } = await render(page);
+
+const services = [
+  { title: 'Führung', href: '/angebote/fuehrung', eyebrow: 'Coaching & Sparring', description: 'Rolle klären, schwierige Gespräche führen und unter Druck tragfähige Entscheidungen treffen.' },
+  { title: 'Teamwork', href: '/angebote/teamwork', eyebrow: 'Supervision & Entwicklung', description: 'Konflikte verstehen, Verantwortung ordnen und Zusammenarbeit wieder arbeitsfähig machen.' },
+  { title: 'Change', href: '/angebote/change', eyebrow: 'Organisationsberatung', description: 'Veränderungen so gestalten, dass Orientierung entsteht und Menschen den Weg mittragen können.' },
+  { title: 'Moderation', href: '/angebote/moderation', eyebrow: 'Klausuren & Großgruppen', description: 'Viele Perspektiven bündeln und komplexe Gespräche zu klaren, gemeinsamen Ergebnissen führen.' },
+];
+---
+
+<BaseLayout title={page.data.seoTitle} description={page.data.description} section="home">
+  <Hero eyebrow={page.data.eyebrow} points={page.data.heroTexts} />
+
+  <Section class="bg-white">
+    <div class="grid items-start gap-9 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-about">Wie ich arbeite</p>
+        <Heading class="mt-4">Genau hinschauen. Zusammenhänge verstehen. Handlungsfähig werden.</Heading>
+      </div>
+      <div class="prose-fabian"><Content /></div>
+    </div>
+  </Section>
+
+  <Section class="border-y border-line bg-paper">
+    <div class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-services">Angebote</p>
+        <Heading class="mt-4 max-w-3xl">Beratung passend zu Ihrer Situation</Heading>
+      </div>
+      <Button href="/angebote" variant="text">Alle Angebote</Button>
+    </div>
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      {services.map((service, index) => <Card {...service} number={`0${index + 1}`} />)}
+    </div>
+  </Section>
+
+  <Section class="bg-white">
+    <div class="grid items-center gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+      <Image src={portrait} alt="Porträt von Meike Fabian" widths={[366, 600]} sizes="(min-width: 1024px) 30vw, 80vw" class="mx-auto aspect-[3/4] w-full max-w-sm rounded-xl object-cover" />
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-about">Meike Fabian</p>
+        <Heading class="mt-4">Erfahrung, die Raum für neue Perspektiven lässt</Heading>
+        <Text class="mt-5 max-w-2xl text-lg">Als Organisationsberaterin, Coach und Supervisorin verbinde ich langjährige Praxiserfahrung mit gruppen- und organisationsdynamischem Wissen. Entscheidend ist für mich eine Beratung, die klar, respektvoll und nah an Ihrem Arbeitsalltag bleibt.</Text>
+        <Button href="/ueber-mich/profil" class="mt-7">Mein Profil</Button>
+      </div>
+    </div>
+  </Section>
+
+  <Section class="bg-ink text-white">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-about">Aus der Zusammenarbeit</p>
+      <blockquote class="mt-6 font-display text-[clamp(1.7rem,3.4vw,2.9rem)] leading-[1.28] text-balance">„Authentisch, lebensklug und immer hilfreich erlebte ich Frau Fabian in meinem Coachingprozess.“</blockquote>
+      <p class="mt-6 text-sm text-white/70">Cornelia Pieper, Miele & Cie. KG</p>
+      <Button href="/ueber-mich/kundenfeedback" class="mt-7 bg-white text-ink hover:text-white">Weitere Stimmen</Button>
+    </div>
+  </Section>
+
+  <Section class="bg-contact/5">
+    <div class="grid items-end gap-8 md:grid-cols-[1fr_auto]">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-contact">Kontakt</p>
+        <Heading class="mt-4 max-w-4xl">Was soll in Ihrer Situation wieder möglich werden?</Heading>
+        <Text class="mt-4 max-w-2xl">Ein erstes Gespräch schafft Klarheit über Anliegen, Ziel und einen sinnvollen Rahmen der Zusammenarbeit.</Text>
+      </div>
+      <Button href="/kontakt">Gespräch anfragen</Button>
+    </div>
+  </Section>
+</BaseLayout>

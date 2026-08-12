@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentPage from '../components/ContentPage.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', ({ id }) => id !== 'home');
+  return pages.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'pages'> }
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+const sectionByDirectory = {
+  'ueber-mich': 'about',
+  angebote: 'services',
+  aktuelles: 'news',
+  kontakt: 'contact',
+} as const;
+const directory = entry.id.split('/')[0] as keyof typeof sectionByDirectory;
+const section = entry.data.section ?? sectionByDirectory[directory] ?? 'legal';
+---
+
+<BaseLayout title={entry.data.seoTitle} description={entry.data.description} section={section}>
+  <ContentPage
+    title={entry.data.title}
+    eyebrow={entry.data.eyebrow}
+    description={entry.data.description}
+    section={section}
+    secondColumn={entry.data.secondColumn}
+    notice={entry.data.notice}
+    media={entry.id === 'angebote/fuehrung' ? 'leadership' : undefined}
+  >
+    <Content />
+  </ContentPage>
+</BaseLayout>

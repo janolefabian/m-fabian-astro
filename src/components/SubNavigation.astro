@@ -1,0 +1,35 @@
+---
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: Item[];
+  currentPath: string;
+}
+
+const { items, currentPath } = Astro.props;
+---
+
+<nav aria-label="Seitennavigation" class="border-b border-line bg-white">
+  <div class="mx-auto flex max-w-7xl gap-7 overflow-x-auto px-6 sm:px-8 lg:px-12">
+    {items.map((item) => {
+      const active = currentPath === item.href;
+
+      return (
+        <a
+          href={item.href}
+          aria-current={active ? 'page' : undefined}
+          class:list={[
+            'relative shrink-0 py-4 text-sm font-semibold no-underline transition-colors sm:py-5',
+            active ? 'text-ink' : 'text-muted hover:text-ink',
+          ]}
+        >
+          {item.label}
+          {active && <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-[var(--accent)]"></span>}
+        </a>
+      );
+    })}
+  </div>
+</nav>

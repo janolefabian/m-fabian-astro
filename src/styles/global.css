@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --color-ink: #172125;
+  --color-muted: #5d686c;
+  --color-paper: #f8f7f3;
+  --color-line: #dce1df;
+  --color-about: #25aca4;
+  --color-services: #b87919;
+  --color-news: #4f9c32;
+  --color-contact: #c9343b;
+}
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  --accent: #25aca4;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f8f7f3;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #172125;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: #fff;
+  background: var(--accent);
+}
+
+a { text-underline-offset: 0.2em; }
+img { height: auto; }
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent), white 25%);
+  outline-offset: 4px;
+}
+
+.prose-fabian {
+  color: #354145;
+  font-size: clamp(1.02rem, 0.98rem + 0.15vw, 1.12rem);
+}
+
+.prose-fabian > * + * { margin-top: 1.15em; }
+.prose-fabian h2,
+.prose-fabian h3 {
+  color: #172125;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+.prose-fabian h2 { margin-top: 2em; font-size: clamp(1.75rem, 2.7vw, 2.35rem); }
+.prose-fabian h3 { margin-top: 1.8em; font-size: clamp(1.35rem, 2vw, 1.7rem); }
+.prose-fabian > h2:first-child,
+.prose-fabian > h3:first-child { margin-top: 0; }
+.prose-fabian strong { color: #172125; font-weight: 650; }
+.prose-fabian ul { padding-left: 1.25rem; list-style: none; }
+.prose-fabian li { position: relative; padding-left: 1rem; }
+.prose-fabian li + li { margin-top: 0.4rem; }
+.prose-fabian li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--accent);
+  content: "—";
+}
+.prose-fabian blockquote {
+  margin: 2rem 0;
+  border-left: 3px solid var(--accent);
+  padding: 0.3rem 0 0.3rem 1.5rem;
+  color: #253237;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  line-height: 1.5;
+}
+.prose-fabian a { color: color-mix(in srgb, var(--accent), #172125 28%); font-weight: 650; }
+.prose-fabian a:hover { color: #172125; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}

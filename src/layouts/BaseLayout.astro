@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { sectionColors } from '../data/navigation';
+
+interface Props {
+  title: string;
+  description: string;
+  section?: keyof typeof sectionColors;
+  image?: string;
+}
+
+const { title, description, section = 'home', image = '/images/meike-fabian.jpg' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+const accent = sectionColors[section];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': ['Person', 'ProfessionalService'],
+  name: 'Meike Fabian',
+  url: new URL('/', Astro.site).href,
+  image: socialImage.href,
+  email: 'mailto:info@m-fabian.de',
+  telephone: '+49 175 1759556',
+  jobTitle: 'Organisationsberaterin, Coach und Supervisorin',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Krumme Straße 13',
+    postalCode: '32756',
+    addressLocality: 'Detmold',
+    addressCountry: 'DE',
+  },
+  areaServed: 'Deutschland',
+  sameAs: ['https://www.dgsv.de', 'https://www.dggo.de'],
+};
+---
+
+<!doctype html>
+<html lang="de" style={`--accent:${accent}`}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={accent} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Meike Fabian – Training und Beratung" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Meike Fabian – Organisationsberaterin, Coach und Supervisorin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a href="#main" class="sr-only z-50 bg-white p-3 text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Zum Inhalt</a>
+    <Header pathname={Astro.url.pathname} />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,284 @@
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "Neue Unterseite erstellt: {path}"
+      update: "Inhalt aktualisiert: {path}"
+
+content:
+  - name: main_pages
+    label: Hauptseiten
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    subfolders: false
+    operations:
+      create: false
+      delete: false
+      rename: false
+    view:
+      layout: list
+      fields: [title, navTitle]
+      primary: title
+      sort: [title]
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Kurztitel
+        type: string
+        required: true
+        description: Kurze interne Bezeichnung. Das Hauptmenü wird dadurch nicht verändert.
+      - name: eyebrow
+        label: Text über der Überschrift
+        type: string
+      - name: heroTexts
+        label: Wechselnde Hero-Texte
+        type: string
+        list: true
+      - name: body
+        label: Haupttext
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+      - name: secondColumn
+        label: Optionale zweite Textspalte
+        type: text
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180
+
+  - name: about_pages
+    label: Unterseiten – Über mich
+    type: collection
+    path: src/content/pages/ueber-mich
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{title}.md"
+      field: create
+    operations:
+      create: true
+      delete: false
+      rename: false
+    view:
+      layout: list
+      fields: [title, navTitle]
+      primary: title
+      sort: [title]
+      search: [title, navTitle, description]
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Titel in der Unternavigation
+        type: string
+        required: true
+        description: Erzeugt nur einen Eintrag unter „Über mich“, niemals im Hauptmenü.
+      - name: eyebrow
+        label: Text über der Überschrift
+        type: string
+      - name: body
+        label: Haupttext
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+      - name: secondColumn
+        label: Optionale zweite Textspalte
+        type: text
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180
+
+  - name: service_pages
+    label: Unterseiten – Angebote
+    type: collection
+    path: src/content/pages/angebote
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{title}.md"
+      field: create
+    operations:
+      create: true
+      delete: false
+      rename: false
+    view:
+      layout: list
+      fields: [title, navTitle]
+      primary: title
+      sort: [title]
+      search: [title, navTitle, description]
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Titel in der Unternavigation
+        type: string
+        required: true
+        description: Erzeugt nur einen Eintrag unter „Angebote“, niemals im Hauptmenü.
+      - name: eyebrow
+        label: Text über der Überschrift
+        type: string
+      - name: body
+        label: Haupttext
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+      - name: secondColumn
+        label: Optionale zweite Textspalte
+        type: text
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180
+
+  - name: news_pages
+    label: Unterseiten – Aktuelles
+    type: collection
+    path: src/content/pages/aktuelles
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{title}.md"
+      field: create
+    operations:
+      create: true
+      delete: false
+      rename: false
+    view:
+      layout: list
+      fields: [title, navTitle]
+      primary: title
+      sort: [title]
+      search: [title, navTitle, description]
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Titel in der Unternavigation
+        type: string
+        required: true
+        description: Erzeugt nur einen Eintrag unter „Aktuelles“, niemals im Hauptmenü.
+      - name: eyebrow
+        label: Text über der Überschrift
+        type: string
+      - name: body
+        label: Haupttext
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+      - name: secondColumn
+        label: Optionale zweite Textspalte
+        type: text
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180
+
+  - name: contact_pages
+    label: Unterseiten – Kontakt
+    type: collection
+    path: src/content/pages/kontakt
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{title}.md"
+      field: create
+    operations:
+      create: true
+      delete: false
+      rename: false
+    view:
+      layout: list
+      fields: [title, navTitle]
+      primary: title
+      sort: [title]
+      search: [title, navTitle, description]
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Titel in der Unternavigation
+        type: string
+        required: true
+        description: Erzeugt nur einen Eintrag unter „Kontakt“, niemals im Hauptmenü.
+      - name: eyebrow
+        label: Text über der Überschrift
+        type: string
+      - name: body
+        label: Haupttext
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+      - name: secondColumn
+        label: Optionale zweite Textspalte
+        type: text
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180

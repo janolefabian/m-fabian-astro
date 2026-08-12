@@ -1,0 +1,103 @@
+---
+import Container from './Container.astro';
+import PageHeader from './PageHeader.astro';
+import SubNavigation from './SubNavigation.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { getSectionNavigation } from '../data/navigation';
+import conductor from '../assets/images/leadership-conductor.jpg';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  description: string;
+  section: string;
+  secondColumn?: string;
+  notice?: string;
+  media?: 'leadership';
+}
+
+const { title, eyebrow, description, section, secondColumn, notice, media } = Astro.props;
+const subnav = getSectionNavigation(section);
+const contentPages = await getCollection('pages');
+const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
+const sectionDirectories: Record<string, string> = {
+  about: 'ueber-mich',
+  services: 'angebote',
+  news: 'aktuelles',
+  contact: 'kontakt',
+};
+const configuredItems = subnav.map((item) => ({
+  ...item,
+  label: labels.get(item.href.replace(/^\//, '')) ?? item.label,
+}));
+const configuredHrefs = new Set(configuredItems.map((item) => item.href));
+const sectionDirectory = sectionDirectories[section];
+const additionalItems = sectionDirectory
+  ? contentPages
+      .filter((entry) => entry.id.startsWith(`${sectionDirectory}/`))
+      .map((entry) => ({ label: entry.data.navTitle, href: `/${entry.id}` }))
+      .filter((item) => !configuredHrefs.has(item.href))
+      .sort((a, b) => a.label.localeCompare(b.label, 'de'))
+  : [];
+const subnavItems = [...configuredItems, ...additionalItems];
+const sideLines = secondColumn?.split('\n').map((line) => line.trim()).filter(Boolean) ?? [];
+const sideTitle = sideLines[0];
+const sideItems = sideLines.slice(1);
+const isList = sideItems.some((line) => line.startsWith('•'));
+---
+
+<PageHeader title={title} eyebrow={eyebrow} description={description} />
+{subnavItems.length > 0 && <SubNavigation items={subnavItems} currentPath={Astro.url.pathname} />}
+
+<Container class="py-12 sm:py-14 lg:py-16">
+  {notice && (
+    <aside class="mb-10 rounded-2xl border border-contact/30 bg-contact/5 px-5 py-4 text-sm font-semibold text-contact" role="note">
+      {notice}
+    </aside>
+  )}
+
+  <article class:list={[
+    'mx-auto grid min-w-0 gap-12 lg:gap-16',
+    secondColumn || media ? 'max-w-6xl lg:grid-cols-[minmax(0,1fr)_20rem]' : 'max-w-4xl',
+  ]}>
+    <div class="prose-fabian min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1"><slot /></div>
+
+    {media === 'leadership' && (
+      <figure class="order-first self-start overflow-hidden rounded-lg bg-paper lg:order-none lg:col-start-2 lg:row-start-1 lg:mt-2">
+        <Image
+          src={conductor}
+          alt="Dirigent in konzentrierter Führungssituation"
+          widths={[320, 480, 640]}
+          sizes="(min-width: 1024px) 20rem, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/3] w-full object-cover object-[center_42%]"
+        />
+      </figure>
+    )}
+
+    {secondColumn && (
+      <aside class:list={[
+        'self-start border-t-2 border-[var(--accent)] pt-5 lg:col-start-2',
+        media ? 'lg:row-start-2' : 'lg:row-start-1 lg:mt-2',
+      ]}>
+        {sideTitle && <h2 class="font-display text-[1.55rem] font-medium leading-tight text-ink">{sideTitle}</h2>}
+        {isList ? (
+          <ul class="mt-5 space-y-3 text-[0.98rem] leading-relaxed text-muted">
+            {sideItems.map((item) => (
+              <li class="grid grid-cols-[0.65rem_1fr] gap-2.5">
+                <span aria-hidden="true" class="mt-[0.72em] h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+                <span>{item.replace(/^•\s*/, '')}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="mt-5 space-y-4 text-[0.98rem] leading-relaxed text-muted">
+            {secondColumn.split(/\n\s*\n/).slice(1).map((block) => <p class="whitespace-pre-line">{block}</p>)}
+          </div>
+        )}
+      </aside>
+    )}
+  </article>
+</Container>

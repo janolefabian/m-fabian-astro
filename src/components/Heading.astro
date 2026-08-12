@@ -1,0 +1,18 @@
+---
+interface Props {
+  as?: 'h1' | 'h2' | 'h3';
+  size?: 'xl' | 'lg' | 'md';
+  class?: string;
+}
+
+const { as: Tag = 'h2', size = 'lg', class: className = '' }: Props = Astro.props;
+const sizes = {
+  xl: 'text-[clamp(2.8rem,5.4vw,4.85rem)] leading-[0.99]',
+  lg: 'text-[clamp(2.15rem,4vw,3.85rem)] leading-[1.06]',
+  md: 'text-[clamp(1.6rem,2.5vw,2.3rem)] leading-[1.14]',
+};
+---
+
+<Tag class:list={['font-display font-medium tracking-[-0.035em] text-ink text-balance', sizes[size], className]}>
+  <slot />
+</Tag>

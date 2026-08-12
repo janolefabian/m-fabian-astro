@@ -1,0 +1,15 @@
+---
+import Container from './Container.astro';
+
+interface Props {
+  id?: string;
+  class?: string;
+  contained?: boolean;
+}
+
+const { id, class: className = '', contained = true } = Astro.props;
+---
+
+<section id={id} class:list={['py-14 sm:py-16 lg:py-20', className]}>
+  {contained ? <Container><slot /></Container> : <slot />}
+</section>

@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import Container from './Container.astro';
+import Heading from './Heading.astro';
+import Button from './Button.astro';
+import portrait from '../assets/images/meike-fabian-wide.jpg';
+
+interface Props { eyebrow?: string; points?: string[] }
+const { eyebrow = 'Supervision · Coaching · Organisationsberatung', points = [] } = Astro.props;
+---
+
+<section class="relative overflow-hidden border-b border-line bg-paper py-10 sm:py-12 lg:py-14">
+  <Container>
+    <div class="grid items-center gap-9 lg:grid-cols-[0.98fr_1.02fr] lg:gap-14 xl:gap-20">
+      <div class="order-2 lg:order-1">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-about">{eyebrow}</p>
+        <Heading as="h1" size="xl" class="mt-5 max-w-[12ch]">Klarheit gewinnen.<br /><em class="font-normal text-about">Zusammenarbeit</em> gestalten.</Heading>
+        <p class="mt-6 max-w-xl text-[1.05rem] leading-7 text-muted sm:text-lg sm:leading-8">Ich begleite Führungskräfte, Teams und Organisationen dabei, schwierige Situationen zu verstehen und tragfähige nächste Schritte zu entwickeln.</p>
+        <div class="mt-7 flex flex-wrap gap-x-5 gap-y-3">
+          <Button href="/kontakt">Gespräch anfragen</Button>
+          <Button href="/angebote" variant="text">Angebote ansehen</Button>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2">
+        <Image
+          src={portrait}
+          alt="Meike Fabian"
+          widths={[640, 900, 1210]}
+          sizes="(min-width: 1024px) 46vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          quality={88}
+          class="aspect-[5/4] w-full rounded-[0.75rem] object-cover object-center"
+        />
+      </div>
+    </div>
+    {points.length > 0 && (
+      <ul class="mt-9 grid border-t border-line pt-5 sm:grid-cols-2 sm:gap-x-8 lg:mt-11 lg:grid-cols-4 lg:gap-x-6">
+        {points.slice(0, 4).map((point) => (
+          <li class="py-2 text-sm font-semibold text-ink"><span class="mr-2 text-about" aria-hidden="true">—</span>{point}</li>
+        ))}
+      </ul>
+    )}
+  </Container>
+</section>

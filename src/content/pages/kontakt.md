@@ -1,0 +1,30 @@
+---
+title: Kontakt
+navTitle: Kontakt
+seoTitle: Kontakt | Meike Fabian in Detmold
+description: Nehmen Sie Kontakt mit Meike Fabian auf und schildern Sie kurz Ihr Anliegen zu Coaching, Supervision, Beratung oder Moderation.
+section: contact
+eyebrow: Der erste Schritt ist ein Gespräch
+secondColumn: |-
+  Praxis
+
+  Krumme Straße 13
+  32756 Detmold
+
+  Telefon
+  0175 1759556
+
+  E-Mail
+  info@m-fabian.de
+order: 40
+---
+
+## Lassen Sie uns Ihr Anliegen klären
+
+Sie möchten wissen, welches Beratungsformat zu Ihrer Situation passt? Schreiben Sie mir kurz, worum es geht, oder rufen Sie mich an. In einem ersten Gespräch klären wir Anlass, Ziel, Beteiligte und den möglichen Rahmen der Zusammenarbeit.
+
+**Meike Fabian**  
+Organisationsberaterin, Coach und Supervisorin (DGSv), Trainerin für Gruppen- und Organisationsdynamik (DGGO)
+
+[info@m-fabian.de](mailto:info@m-fabian.de)  
+[0175 1759556](tel:+491751759556)

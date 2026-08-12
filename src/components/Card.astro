@@ -1,0 +1,27 @@
+---
+interface Props {
+  href?: string;
+  eyebrow?: string;
+  title: string;
+  description: string;
+  number?: string;
+}
+
+const { href, eyebrow, title, description, number } = Astro.props;
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag
+  href={href}
+  class="group relative flex min-h-72 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-line bg-white p-7 no-underline shadow-[0_20px_70px_-45px_rgba(23,33,37,0.4)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)] sm:p-8"
+>
+  <div class="flex items-center justify-between gap-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+    <span>{eyebrow}</span>
+    {number && <span>{number}</span>}
+  </div>
+  <div>
+    <h3 class="font-display text-[clamp(1.8rem,3vw,2.5rem)] leading-tight text-ink">{title}</h3>
+    <p class="mt-4 text-base leading-7 text-muted">{description}</p>
+    {href && <span class="mt-6 inline-flex items-center gap-2 font-semibold text-ink group-hover:text-[var(--accent)]">Mehr erfahren <span aria-hidden="true">→</span></span>}
+  </div>
+</Tag>
