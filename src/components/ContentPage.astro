@@ -16,7 +16,7 @@ interface Props {
   secondColumn?: string;
   notice?: string;
   media?: 'leadership';
-  variant?: 'default' | 'profile' | 'news' | 'contact';
+  variant?: 'default' | 'profile' | 'news' | 'contact' | 'hub-about' | 'hub-services' | 'references' | 'testimonials' | 'connections';
 }
 
 const { title, eyebrow, description, section, secondColumn, notice, media, variant = 'default' } = Astro.props;
@@ -48,6 +48,8 @@ const sideLines = secondColumn?.split('\n').map((line) => line.trim()).filter(Bo
 const sideTitle = sideLines[0];
 const sideItems = sideLines.slice(1);
 const isList = sideItems.some((line) => line.startsWith('•'));
+const isWide = ['hub-about', 'hub-services', 'references', 'testimonials', 'connections'].includes(variant);
+const isCustomGrid = ['testimonials', 'connections'].includes(variant);
 ---
 
 <PageHeader title={title} eyebrow={eyebrow} description={description} />
@@ -62,13 +64,19 @@ const isList = sideItems.some((line) => line.startsWith('•'));
 
   <article class:list={[
     'mx-auto grid min-w-0 gap-12 lg:gap-16',
-    secondColumn || media ? 'max-w-6xl lg:grid-cols-[minmax(0,1fr)_20rem]' : 'max-w-4xl',
+    secondColumn || media
+      ? 'max-w-6xl lg:grid-cols-[minmax(0,1fr)_20rem]'
+      : isWide
+        ? 'max-w-6xl'
+        : 'max-w-4xl',
   ]}>
     <div class="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1">
       <div class:list={[
-        'prose-fabian',
+        !isCustomGrid && 'prose-fabian',
         variant === 'profile' && 'prose-profile',
         variant === 'contact' && 'prose-contact',
+        (variant === 'hub-about' || variant === 'hub-services') && 'prose-hub',
+        variant === 'references' && 'prose-references',
       ]}><slot /></div>
       <slot name="after-content" />
     </div>

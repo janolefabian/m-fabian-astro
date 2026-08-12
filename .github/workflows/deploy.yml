@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repository laden
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Astro bauen
-        uses: withastro/action@v3
+        uses: withastro/action@v6
 
   deploy:
     environment:

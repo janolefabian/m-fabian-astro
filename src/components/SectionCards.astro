@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import { getSectionNavigation } from '../data/navigation';
+import Card from './Card.astro';
+import Button from './Button.astro';
+
+interface Props {
+  section: 'about' | 'services';
+}
+
+const { section } = Astro.props;
+const pages = await getCollection('pages');
+const entries = new Map(pages.map((entry) => [`/${entry.id}`, entry]));
+const items = getSectionNavigation(section)
+  .map((item) => ({ item, entry: entries.get(item.href) }))
+  .filter((item) => item.entry);
+const isServices = section === 'services';
+---
+
+<section aria-labelledby={`${section}-overview-heading`} class="mt-12 border-t border-line pt-10 sm:mt-14 sm:pt-12">
+  <p class:list={[
+    'text-xs font-bold uppercase tracking-[0.18em]',
+    isServices ? 'text-services-text' : 'text-about-text',
+  ]}>{isServices ? 'Vier Wege der Zusammenarbeit' : 'Mehr über Meike Fabian'}</p>
+  <h2 id={`${section}-overview-heading`} class="mt-3 max-w-3xl font-display text-[clamp(1.85rem,3vw,2.65rem)] font-medium leading-tight text-ink">
+    {isServices ? 'Welches Anliegen passt zu Ihrer Situation?' : 'Erfahrung, Haltung und Zusammenarbeit'}
+  </h2>
+
+  <div class="mt-8 grid gap-5 md:grid-cols-2">
+    {items.map(({ item, entry }, index) => entry && (
+      <Card
+        href={item.href}
+        eyebrow={entry.data.eyebrow}
+        title={entry.data.navTitle}
+        description={entry.data.description}
+        number={isServices ? `0${index + 1}` : undefined}
+      />
+    ))}
+  </div>
+
+  {isServices && (
+    <div class="mt-8 flex flex-col justify-between gap-5 rounded-3xl bg-ink px-6 py-7 text-white sm:flex-row sm:items-center sm:px-8">
+      <p class="max-w-2xl font-display text-[clamp(1.35rem,2.2vw,1.75rem)] leading-snug">Sie sind noch nicht sicher, welches Format sinnvoll ist?</p>
+      <Button href="/kontakt" variant="light">Anliegen schildern</Button>
+    </div>
+  )}
+</section>

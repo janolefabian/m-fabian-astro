@@ -10,20 +10,30 @@ order: 14
 
 ### Deutsche Gesellschaft für Gruppen- und Organisationsdynamik
 
-[www.dggo.de](https://www.dggo.de)
+Fachverband für professionelles Arbeiten mit Gruppen- und Organisationsdynamik.
+
+[Website der DGGO](https://www.dggo.de)
 
 ### Deutsche Gesellschaft für Supervision und Coaching e. V.
 
-[www.dgsv.de](https://www.dgsv.de)
+Berufs- und Fachverband für Supervision, Coaching und Organisationsberatung.
+
+[Website der DGSv](https://www.dgsv.de)
 
 ### Fortbildungsinstitut für Supervision
 
-[www.fis-supervision.de](https://www.fis-supervision.de)
+Ausbildungsinstitut für Supervision, Coaching und beraterische Kompetenz.
+
+[Website des FIS](https://www.fis-supervision.de)
 
 ### Ina Kramer
 
-[www.ina-kramer.de](https://www.ina-kramer.de)
+Kollegiale Verbindung und gemeinsame fachliche Arbeit in Beratung und Supervision.
+
+[Website von Ina Kramer](https://www.ina-kramer.de)
 
 ### Klaus Junghans
 
-[www.supervision-lemgo.de](https://www.supervision-lemgo.de)
+Kollegiale Verbindung und gemeinsame Veröffentlichungen zu Führung und Organisation.
+
+[Website von Klaus Junghans](https://www.supervision-lemgo.de)

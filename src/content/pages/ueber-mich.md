@@ -13,10 +13,3 @@ order: 10
 Ich begleite Menschen, Teams und Organisationen seit mehr als zwei Jahrzehnten in Entwicklungs- und Veränderungsprozessen. Meine Arbeit ist von Respekt, Offenheit und Wertschätzung getragen. Eine vertrauensvolle und zugleich entspannte Arbeitsatmosphäre ist für mich die Grundlage nachhaltiger Entwicklung.
 
 Wer mit mir arbeitet, lässt sich auf einen lebendigen und kreativen Prozess ein. Wir betrachten nicht nur das unmittelbar sichtbare Problem, sondern auch Rollen, Beziehungen und den organisatorischen Kontext. So entstehen Lösungen, die verstanden, getragen und im Alltag umgesetzt werden können.
-
-### Mehr erfahren
-
-- [Profil und Qualifikationen](/ueber-mich/profil)
-- [Ausgewählte Referenzen](/ueber-mich/referenzen)
-- [Stimmen aus der Zusammenarbeit](/ueber-mich/kundenfeedback)
-- [Fachliche Verbindungen](/ueber-mich/verbindungen)

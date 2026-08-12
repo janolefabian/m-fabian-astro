@@ -1,0 +1,40 @@
+---
+interface Props {
+  body: string;
+}
+
+const { body } = Astro.props;
+const connections = body
+  .split(/^###\s+/m)
+  .slice(1)
+  .map((section) => {
+    const [titleLine, ...rest] = section.trim().split('\n');
+    const content = rest.join('\n').trim();
+    const link = content.match(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/);
+    const description = content
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/, '')
+      .replace(/\n{2,}/g, ' ')
+      .trim();
+    return { title: titleLine.trim(), label: link?.[1], href: link?.[2], description };
+  });
+---
+
+<div class="grid gap-5 md:grid-cols-2">
+  {connections.map((connection, index) => (
+    <article class:list={[
+      'flex min-h-64 flex-col justify-between rounded-3xl border border-line bg-paper p-6 sm:p-7',
+      index === connections.length - 1 && connections.length % 2 === 1 && 'md:col-span-2',
+    ]}>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-about-text">{String(index + 1).padStart(2, '0')}</p>
+        <h2 class="mt-4 max-w-xl font-display text-[clamp(1.5rem,2.4vw,2rem)] font-medium leading-tight text-ink">{connection.title}</h2>
+        {connection.description && <p class="mt-4 max-w-2xl text-base leading-7 text-muted">{connection.description}</p>}
+      </div>
+      {connection.href && (
+        <a href={connection.href} target="_blank" rel="noreferrer" class="mt-7 inline-flex items-center gap-2 font-semibold text-ink no-underline hover:text-about-text">
+          {connection.label ?? 'Website besuchen'} <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </article>
+  ))}
+</div>

@@ -4,6 +4,9 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContentPage from '../components/ContentPage.astro';
 import NewsOverview from '../components/NewsOverview.astro';
+import SectionCards from '../components/SectionCards.astro';
+import TestimonialGrid from '../components/TestimonialGrid.astro';
+import ConnectionsGrid from '../components/ConnectionsGrid.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ id }) => id !== 'home');
@@ -26,6 +29,16 @@ const directory = entry.id.split('/')[0] as keyof typeof sectionByDirectory;
 const section = entry.data.section ?? sectionByDirectory[directory] ?? 'legal';
 const variant = entry.id === 'ueber-mich/profil'
   ? 'profile'
+  : entry.id === 'ueber-mich'
+    ? 'hub-about'
+    : entry.id === 'angebote'
+      ? 'hub-services'
+      : entry.id === 'ueber-mich/referenzen'
+        ? 'references'
+        : entry.id === 'ueber-mich/kundenfeedback'
+          ? 'testimonials'
+          : entry.id === 'ueber-mich/verbindungen'
+            ? 'connections'
   : entry.id === 'aktuelles'
     ? 'news'
     : entry.id === 'kontakt'
@@ -44,7 +57,13 @@ const variant = entry.id === 'ueber-mich/profil'
     media={entry.id === 'angebote/fuehrung' ? 'leadership' : undefined}
     variant={variant}
   >
-    <Content />
+    {entry.id === 'ueber-mich/kundenfeedback'
+      ? <TestimonialGrid body={entry.body ?? ''} />
+      : entry.id === 'ueber-mich/verbindungen'
+        ? <ConnectionsGrid body={entry.body ?? ''} />
+        : <Content />}
+    {entry.id === 'ueber-mich' && <SectionCards slot="after-content" section="about" />}
+    {entry.id === 'angebote' && <SectionCards slot="after-content" section="services" />}
     {entry.id === 'aktuelles' && <NewsOverview slot="after-content" />}
   </ContentPage>
 </BaseLayout>

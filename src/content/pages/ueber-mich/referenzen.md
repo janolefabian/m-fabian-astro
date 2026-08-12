@@ -8,38 +8,51 @@ eyebrow: Erfahrung in unterschiedlichen Feldern
 order: 12
 ---
 
-In folgenden Unternehmen und Organisationen habe ich in der Vergangenheit als Trainerin oder Beraterin gearbeitet (Auswahl):
+Die folgenden Auftraggeber stehen beispielhaft für unterschiedliche Branchen, Organisationsformen und Aufgabenstellungen, in denen ich als Trainerin oder Beraterin gearbeitet habe.
 
-- Ambulanter Hospiz- und Palliativdienst
+## Unternehmen & Organisationen
+
 - AstraZeneca
 - BASF Coatings
+- Daimler
+- ESRI Deutschland
+- Hochtief
+- Königswieser Network
+- Kühne + Nagel Hamburg
+- LKW Walter
+- Phoenix Contact
+
+## Gesundheit, Soziales & Beratung
+
+- Ambulanter Hospiz- und Palliativdienst
+- Caritas
+- Der Paritätische
+- Deutscher Kinderschutzbund
+- Klinikum Lippe
+- Lebenshilfe für Menschen mit geistiger Behinderung e. V.
+- Palliativnetz Münster
+- PariSozial GmbH Detmold
+- Stiftung Eben-Ezer
+
+## Bildung, Verwaltung & Kirche
+
 - Bund Deutscher Katholischer Jugend (BDKJ)
 - Bistum Paderborn
-- Caritas
-- Daimler
-- Der Paritätische
 - Deutsche QiGong-Gesellschaft
-- Deutscher Kinderschutzbund
 - Erzbistum Paderborn
-- ESRI Deutschland
 - Evangelischer Entwicklungsdienst e. V. (EED)
 - Fortbildungsinstitut für Supervision (FIS)
-- Hochtief
 - Jobcenter Minden
 - Jugendamt Dortmund
 - Katholische Hochschule Paderborn
-- Klinikum Lippe
-- Königswieser Network
-- Kühne + Nagel Hamburg
-- Lebenshilfe für Menschen mit geistiger Behinderung e. V.
-- LKW Walter
 - Missio Internationales Katholisches Missionswerk
 - Universität Bielefeld
-- Palliativnetz Münster
-- PariSozial GmbH Detmold
-- Phoenix Contact
-- Radio Hochstift
-- Stiftung Eben-Ezer
 - Westfälisches Kinderdorf
 
-Hinzu kommen verschiedene Kinder- und Jugendhilfeeinrichtungen, Frauenberatungsstellen, Frauenhäuser, Suchtberatungsstellen sowie ärztliche Gemeinschaftspraxen.
+## Medien & weitere Arbeitsfelder
+
+- Radio Hochstift
+- Kinder- und Jugendhilfeeinrichtungen
+- Frauenberatungsstellen und Frauenhäuser
+- Suchtberatungsstellen
+- Ärztliche Gemeinschaftspraxen
