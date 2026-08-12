@@ -1,9 +1,11 @@
 ---
 import { navigation, sectionColors, sectionTextColors } from '../data/navigation';
 import { getCollection } from 'astro:content';
+import { withBase, withoutBase } from '../utils/paths';
 
 interface Props { pathname: string }
-const { pathname } = Astro.props;
+const { pathname: rawPathname } = Astro.props;
+const pathname = withoutBase(rawPathname);
 const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 const contentPages = await getCollection('pages');
 const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
@@ -15,7 +17,7 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
     {navigation.map((item) => (
       <li class="group relative">
         <a
-          href={item.href}
+          href={withBase(item.href)}
           aria-current={isActive(item.href) ? 'page' : undefined}
           class="relative block py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink no-underline transition hover:text-[var(--nav-text)]"
           style={`--nav-color:${sectionColors[item.section]};--nav-text:${sectionTextColors[item.section]}`}
@@ -32,7 +34,7 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
           <ul class="invisible absolute left-0 top-full z-30 min-w-52 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
             {item.children.map((child) => (
               <li>
-                <a href={child.href} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-text)]">
+                <a href={withBase(child.href)} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-text)]">
                   {labelFor(child.href, child.label)}
                 </a>
               </li>
@@ -53,10 +55,10 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
     <ul class="space-y-1">
       {navigation.map((item) => (
         <li>
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined} class="block rounded-xl px-3 py-2 text-lg font-semibold text-ink no-underline hover:bg-paper">{labelFor(item.href, item.label)}</a>
+          <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined} class="block rounded-xl px-3 py-2 text-lg font-semibold text-ink no-underline hover:bg-paper">{labelFor(item.href, item.label)}</a>
           {item.children && (
             <ul class="mb-3 border-l border-line pl-3">
-              {item.children.map((child) => <li><a href={child.href} class="block px-3 py-1 text-sm text-muted no-underline hover:text-ink">{labelFor(child.href, child.label)}</a></li>)}
+              {item.children.map((child) => <li><a href={withBase(child.href)} class="block px-3 py-1 text-sm text-muted no-underline hover:text-ink">{labelFor(child.href, child.label)}</a></li>)}
             </ul>
           )}
         </li>

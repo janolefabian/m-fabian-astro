@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/paths';
+
 interface Props {
   href?: string;
   eyebrow?: string;
@@ -9,10 +11,11 @@ interface Props {
 
 const { href, eyebrow, title, description, number } = Astro.props;
 const Tag = href ? 'a' : 'article';
+const resolvedHref = href ? withBase(href) : undefined;
 ---
 
 <Tag
-  href={href}
+  href={resolvedHref}
   class="group relative flex min-h-72 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-line bg-white p-7 no-underline shadow-[0_20px_70px_-45px_rgba(23,33,37,0.4)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)] sm:p-8"
 >
   <div class="flex items-center justify-between gap-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">

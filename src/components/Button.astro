@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/paths';
+
 interface Props {
   href: string;
   variant?: 'solid' | 'light' | 'text';
@@ -6,10 +8,11 @@ interface Props {
 }
 
 const { href, variant = 'solid', class: className = '' } = Astro.props;
+const resolvedHref = withBase(href);
 ---
 
 <a
-  href={href}
+  href={resolvedHref}
   class:list={[
     'group inline-flex min-h-12 items-center gap-3 rounded-full font-semibold no-underline transition duration-300',
     variant === 'solid'

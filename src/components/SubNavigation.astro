@@ -1,4 +1,6 @@
 ---
+import { withBase, withoutBase } from '../utils/paths';
+
 interface Item {
   label: string;
   href: string;
@@ -9,7 +11,8 @@ interface Props {
   currentPath: string;
 }
 
-const { items, currentPath } = Astro.props;
+const { items, currentPath: rawCurrentPath } = Astro.props;
+const currentPath = withoutBase(rawCurrentPath);
 ---
 
 <nav aria-label="Seitennavigation" class="relative border-b border-line bg-white">
@@ -20,7 +23,7 @@ const { items, currentPath } = Astro.props;
 
       return (
         <a
-          href={item.href}
+          href={withBase(item.href)}
           aria-current={active ? 'page' : undefined}
           class:list={[
             'relative shrink-0 snap-start py-4 text-sm font-semibold no-underline transition-colors sm:py-5',

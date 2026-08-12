@@ -1,5 +1,6 @@
 ---
 import Container from './Container.astro';
+import { withBase } from '../utils/paths';
 const year = new Date().getFullYear();
 ---
 
@@ -20,8 +21,8 @@ const year = new Date().getFullYear();
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-muted">Rechtliches</p>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/impressum" class="text-ink hover:text-[var(--accent-text)]">Impressum & Datenschutz</a></li>
-        <li><a href="/agb" class="text-ink hover:text-[var(--accent-text)]">AGB</a></li>
+        <li><a href={withBase('/impressum')} class="text-ink hover:text-[var(--accent-text)]">Impressum & Datenschutz</a></li>
+        <li><a href={withBase('/agb')} class="text-ink hover:text-[var(--accent-text)]">AGB</a></li>
       </ul>
     </div>
   </Container>

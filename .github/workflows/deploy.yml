@@ -22,6 +22,9 @@ jobs:
         uses: actions/checkout@v7
       - name: Astro bauen
         uses: withastro/action@v6
+        env:
+          SITE_URL: https://janolefabian.github.io
+          BASE_PATH: /m-fabian-astro
 
   deploy:
     environment:

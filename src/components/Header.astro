@@ -1,14 +1,15 @@
 ---
 import Container from './Container.astro';
 import Navigation from './Navigation.astro';
+import { withBase } from '../utils/paths';
 interface Props { pathname: string }
 const { pathname } = Astro.props;
 ---
 
 <header class="relative z-30 border-b border-line/80 bg-white/95">
   <Container class="flex min-h-22 items-center justify-between gap-6 py-4 lg:min-h-26">
-    <a href="/" class="shrink-0 text-ink no-underline" aria-label="Meike Fabian – Startseite">
-      <img src="/logo-original.svg" width="391" height="98" alt="Meike Fabian – Training und Beratung" class="h-auto w-44 sm:w-52 xl:w-56" />
+    <a href={withBase('/')} class="shrink-0 text-ink no-underline" aria-label="Meike Fabian – Startseite">
+      <img src={withBase('/logo-original.svg')} width="391" height="98" alt="Meike Fabian – Training und Beratung" class="h-auto w-44 sm:w-52 xl:w-56" />
     </a>
     <Navigation pathname={pathname} />
   </Container>
