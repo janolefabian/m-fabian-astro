@@ -10,6 +10,9 @@ export default defineConfig({
   base,
   output: 'static',
   trailingSlash: 'never',
+  server: {
+    port: 4331,
+  },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

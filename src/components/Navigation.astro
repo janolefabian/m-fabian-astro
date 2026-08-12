@@ -1,5 +1,5 @@
 ---
-import { navigation } from '../data/navigation';
+import { navigation, sectionColors, sectionTextColors } from '../data/navigation';
 import { getCollection } from 'astro:content';
 
 interface Props { pathname: string }
@@ -17,8 +17,8 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
         <a
           href={item.href}
           aria-current={isActive(item.href) ? 'page' : undefined}
-          class="relative block py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink no-underline transition hover:text-[var(--nav-color)]"
-          style={`--nav-color: var(--color-${item.section})`}
+          class="relative block py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink no-underline transition hover:text-[var(--nav-text)]"
+          style={`--nav-color:${sectionColors[item.section]};--nav-text:${sectionTextColors[item.section]}`}
         >
           <span
             class:list={[
@@ -32,7 +32,7 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
           <ul class="invisible absolute left-0 top-full z-30 min-w-52 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
             {item.children.map((child) => (
               <li>
-                <a href={child.href} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-color)]">
+                <a href={child.href} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-text)]">
                   {labelFor(child.href, child.label)}
                 </a>
               </li>

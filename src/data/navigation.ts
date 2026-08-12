@@ -43,6 +43,15 @@ export const sectionColors = {
   legal: '#555b61',
 } as const;
 
+export const sectionTextColors = {
+  home: '#0b716c',
+  about: '#0b716c',
+  services: '#805009',
+  news: '#326c22',
+  contact: '#a5262d',
+  legal: '#4c565a',
+} as const;
+
 export function getActiveSection(pathname: string): SectionId | undefined {
   return navigation.find((item) =>
     item.href === '/kontakt'

@@ -10,7 +10,7 @@ const { eyebrow, title, description } = Astro.props;
 <header class="relative overflow-hidden border-b border-line bg-paper py-10 sm:py-12 lg:py-14">
   <div class="absolute inset-y-0 left-0 w-1.5 bg-[var(--accent)]"></div>
   <Container>
-    {eyebrow && <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent)]">{eyebrow}</p>}
+    {eyebrow && <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-text)]">{eyebrow}</p>}
     <Heading as="h1" size="lg" class="max-w-5xl">{title}</Heading>
     {description && <Text class="mt-4 max-w-3xl text-[1.06rem] sm:text-lg">{description}</Text>}
   </Container>

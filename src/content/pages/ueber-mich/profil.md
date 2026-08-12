@@ -5,12 +5,18 @@ seoTitle: Profil | Meike Fabian
 description: Qualifikationen, berufliche Stationen und Arbeitsschwerpunkte von Meike Fabian, Organisationsberaterin, Coach und Supervisorin.
 section: about
 eyebrow: Über mich
+secondColumn: |-
+  Auf einen Blick
+  • Seit 2004 selbstständig in Beratung und Training
+  • Supervisorin und Coach (DGSv)
+  • Trainerin für Gruppen- und Organisationsdynamik (DGGO)
+  • Langjährige Führungserfahrung
 order: 11
 ---
 
-**Meike Fabian**
+Seit mehr als 20 Jahren begleite ich Menschen, Teams und Organisationen in anspruchsvollen Entwicklungs- und Veränderungsprozessen. Dabei verbinde ich Beratungserfahrung mit fundiertem Wissen über Führung, Gruppen- und Organisationsdynamik.
 
-Organisationsberaterin, Coach und Supervisorin (DGSv), Trainerin für Gruppendynamik (DGGO), Trainerin für Organisationsdynamik (DGGO), Moderatorin, Lehrsupervisorin (DGSv) und Dozentin in der Supervisionsausbildung.
+Ich arbeite als Organisationsberaterin, Coach und Supervisorin (DGSv), Trainerin für Gruppen- und Organisationsdynamik (DGGO), Moderatorin, Lehrsupervisorin (DGSv) und Dozentin in der Supervisionsausbildung.
 
 ## Berufliche Stationen
 

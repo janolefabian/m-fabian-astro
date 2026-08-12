@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContentPage from '../components/ContentPage.astro';
+import NewsOverview from '../components/NewsOverview.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ id }) => id !== 'home');
@@ -23,6 +24,13 @@ const sectionByDirectory = {
 } as const;
 const directory = entry.id.split('/')[0] as keyof typeof sectionByDirectory;
 const section = entry.data.section ?? sectionByDirectory[directory] ?? 'legal';
+const variant = entry.id === 'ueber-mich/profil'
+  ? 'profile'
+  : entry.id === 'aktuelles'
+    ? 'news'
+    : entry.id === 'kontakt'
+      ? 'contact'
+      : 'default';
 ---
 
 <BaseLayout title={entry.data.seoTitle} description={entry.data.description} section={section}>
@@ -34,7 +42,9 @@ const section = entry.data.section ?? sectionByDirectory[directory] ?? 'legal';
     secondColumn={entry.data.secondColumn}
     notice={entry.data.notice}
     media={entry.id === 'angebote/fuehrung' ? 'leadership' : undefined}
+    variant={variant}
   >
     <Content />
+    {entry.id === 'aktuelles' && <NewsOverview slot="after-content" />}
   </ContentPage>
 </BaseLayout>

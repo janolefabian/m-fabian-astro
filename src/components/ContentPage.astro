@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { getSectionNavigation } from '../data/navigation';
 import conductor from '../assets/images/leadership-conductor.jpg';
+import ContactPanel from './ContactPanel.astro';
 
 interface Props {
   title: string;
@@ -15,9 +16,10 @@ interface Props {
   secondColumn?: string;
   notice?: string;
   media?: 'leadership';
+  variant?: 'default' | 'profile' | 'news' | 'contact';
 }
 
-const { title, eyebrow, description, section, secondColumn, notice, media } = Astro.props;
+const { title, eyebrow, description, section, secondColumn, notice, media, variant = 'default' } = Astro.props;
 const subnav = getSectionNavigation(section);
 const contentPages = await getCollection('pages');
 const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
@@ -27,10 +29,11 @@ const sectionDirectories: Record<string, string> = {
   news: 'aktuelles',
   contact: 'kontakt',
 };
-const configuredItems = subnav.map((item) => ({
+const sectionIndexItems = section === 'news' ? [{ label: 'Übersicht', href: '/aktuelles' }] : [];
+const configuredItems = [...sectionIndexItems, ...subnav.map((item) => ({
   ...item,
   label: labels.get(item.href.replace(/^\//, '')) ?? item.label,
-}));
+}))];
 const configuredHrefs = new Set(configuredItems.map((item) => item.href));
 const sectionDirectory = sectionDirectories[section];
 const additionalItems = sectionDirectory
@@ -52,7 +55,7 @@ const isList = sideItems.some((line) => line.startsWith('•'));
 
 <Container class="py-12 sm:py-14 lg:py-16">
   {notice && (
-    <aside class="mb-10 rounded-2xl border border-contact/30 bg-contact/5 px-5 py-4 text-sm font-semibold text-contact" role="note">
+    <aside class="mb-10 rounded-2xl border border-contact/30 bg-contact/5 px-5 py-4 text-sm font-semibold text-contact-text" role="note">
       {notice}
     </aside>
   )}
@@ -61,7 +64,14 @@ const isList = sideItems.some((line) => line.startsWith('•'));
     'mx-auto grid min-w-0 gap-12 lg:gap-16',
     secondColumn || media ? 'max-w-6xl lg:grid-cols-[minmax(0,1fr)_20rem]' : 'max-w-4xl',
   ]}>
-    <div class="prose-fabian min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1"><slot /></div>
+    <div class="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1">
+      <div class:list={[
+        'prose-fabian',
+        variant === 'profile' && 'prose-profile',
+        variant === 'contact' && 'prose-contact',
+      ]}><slot /></div>
+      <slot name="after-content" />
+    </div>
 
     {media === 'leadership' && (
       <figure class="order-first self-start overflow-hidden rounded-lg bg-paper lg:order-none lg:col-start-2 lg:row-start-1 lg:mt-2">
@@ -77,9 +87,12 @@ const isList = sideItems.some((line) => line.startsWith('•'));
       </figure>
     )}
 
-    {secondColumn && (
+    {secondColumn && variant === 'contact' && <ContactPanel content={secondColumn} />}
+
+    {secondColumn && variant !== 'contact' && (
       <aside class:list={[
         'self-start border-t-2 border-[var(--accent)] pt-5 lg:col-start-2',
+        variant === 'profile' && 'order-first lg:order-none',
         media ? 'lg:row-start-2' : 'lg:row-start-1 lg:mt-2',
       ]}>
         {sideTitle && <h2 class="font-display text-[1.55rem] font-medium leading-tight text-ink">{sideTitle}</h2>}

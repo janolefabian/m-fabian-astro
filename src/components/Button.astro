@@ -1,7 +1,7 @@
 ---
 interface Props {
   href: string;
-  variant?: 'solid' | 'text';
+  variant?: 'solid' | 'light' | 'text';
   class?: string;
 }
 
@@ -13,8 +13,10 @@ const { href, variant = 'solid', class: className = '' } = Astro.props;
   class:list={[
     'group inline-flex min-h-12 items-center gap-3 rounded-full font-semibold no-underline transition duration-300',
     variant === 'solid'
-      ? 'bg-ink px-6 py-3 text-white hover:bg-[var(--accent)]'
-      : 'text-ink hover:text-[var(--accent)]',
+      ? 'bg-ink px-6 py-3 text-white hover:bg-[var(--accent-text)]'
+      : variant === 'light'
+        ? 'border border-white bg-white px-6 py-3 text-ink hover:bg-paper'
+        : 'text-ink hover:text-[var(--accent-text)]',
     className,
   ]}
 >

@@ -6,16 +6,17 @@ description: Nehmen Sie Kontakt mit Meike Fabian auf und schildern Sie kurz Ihr 
 section: contact
 eyebrow: Der erste Schritt ist ein Gespräch
 secondColumn: |-
-  Praxis
-
-  Krumme Straße 13
-  32756 Detmold
+  Direkt Kontakt aufnehmen
 
   Telefon
   0175 1759556
 
   E-Mail
   info@m-fabian.de
+
+  Praxis
+  Krumme Straße 13
+  32756 Detmold
 order: 40
 ---
 
@@ -23,8 +24,10 @@ order: 40
 
 Sie möchten wissen, welches Beratungsformat zu Ihrer Situation passt? Schreiben Sie mir kurz, worum es geht, oder rufen Sie mich an. In einem ersten Gespräch klären wir Anlass, Ziel, Beteiligte und den möglichen Rahmen der Zusammenarbeit.
 
-**Meike Fabian**  
-Organisationsberaterin, Coach und Supervisorin (DGSv), Trainerin für Gruppen- und Organisationsdynamik (DGGO)
+## So geht es weiter
 
-[info@m-fabian.de](mailto:info@m-fabian.de)  
-[0175 1759556](tel:+491751759556)
+1. Sie schildern kurz Ihre Situation und was sich verändern soll.
+2. Wir klären, welches Format und welcher Rahmen sinnvoll sind.
+3. Sie entscheiden in Ruhe, ob die Zusammenarbeit für Sie passt.
+
+Das erste Gespräch dient der Orientierung und ist unverbindlich.
