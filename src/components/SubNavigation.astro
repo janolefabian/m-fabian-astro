@@ -15,9 +15,8 @@ const { items, currentPath: rawCurrentPath } = Astro.props;
 const currentPath = withoutBase(rawCurrentPath);
 ---
 
-<nav aria-label="Seitennavigation" class="relative border-b border-line bg-white">
-  <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-9 bg-gradient-to-l from-white to-transparent sm:hidden" aria-hidden="true"></div>
-  <div class="mx-auto flex max-w-7xl snap-x gap-5 overflow-x-auto scroll-smooth px-4 pr-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-7 sm:px-8 sm:pr-8 lg:px-12">
+<nav aria-label="Seitennavigation" class="border-b border-line bg-white">
+  <div class="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 px-4 sm:flex sm:gap-7 sm:overflow-x-auto sm:px-8 lg:px-12">
     {items.map((item) => {
       const active = currentPath === item.href;
 
@@ -26,7 +25,7 @@ const currentPath = withoutBase(rawCurrentPath);
           href={withBase(item.href)}
           aria-current={active ? 'page' : undefined}
           class:list={[
-            'relative shrink-0 snap-start py-4 text-sm font-semibold no-underline transition-colors sm:py-5',
+            'relative min-w-0 py-3 text-sm font-semibold hyphens-auto [overflow-wrap:anywhere] no-underline transition-colors sm:shrink-0 sm:py-5',
             active ? 'text-ink' : 'text-muted hover:text-ink',
           ]}
         >

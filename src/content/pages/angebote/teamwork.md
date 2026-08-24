@@ -1,32 +1,37 @@
 ---
-title: Teamwork
-navTitle: Teamwork
-seoTitle: Teamsupervision & Teamentwicklung | Meike Fabian
-description: Teamsupervision und Teamentwicklung bei Konflikten, unklaren Rollen, belastender Zusammenarbeit oder anspruchsvoller Fallarbeit.
+title: Teamsupervision & Teamentwicklung
+navTitle: Teamsupervision
+seoTitle: Teamsupervision in Detmold | Meike Fabian
+description: Teamsupervision, Fallsupervision und Teamentwicklung bei Konflikten, unklaren Rollen, belastender Zusammenarbeit oder anspruchsvoller Fallarbeit.
 section: services
-eyebrow: Zusammenarbeit verstehen und neu gestalten
+eyebrow: Fallsupervision · Teamsupervision · Teamentwicklung
+intro: Teamsupervision verbindet die Reflexion fachlicher Arbeit mit dem Blick auf Zusammenarbeit, Beziehungen und den gesamten Arbeitskontext.
 secondColumn: |-
-  Typische Anlässe
+  Worum es gehen kann
 
-  • Konflikte werden vermieden oder eskalieren
-  • Rollen und Verantwortlichkeiten bleiben unklar
-  • Besprechungen drehen sich im Kreis
-  • Veränderungen belasten die Zusammenarbeit
-  • Anspruchsvolle Fallarbeit braucht Reflexion
-  • Ein neues Team soll arbeitsfähig werden
+  • Fälle aus der beruflichen Praxis reflektieren
+  • Zusammenarbeit und Kommunikation bearbeiten
+  • Arbeits- und Aufgabenverteilung klären
+  • Fragen der Leitung betrachten
+  • Berufliche Beziehungen gestalten
+  • Besondere Belastungen fortlaufend begleiten
 order: 22
 ---
 
-## Wenn ein Team viel leistet, aber nicht mehr gut zusammenarbeitet
+## Zusammenarbeit und fachliche Arbeit reflektieren
 
-Reibungslose Abläufe, Vertrauen und Kooperation entstehen nicht von allein. Teams verändern sich: Menschen kommen und gehen, Aufgaben verschieben sich, Belastungen steigen. Was lange funktioniert hat, kann plötzlich zu Missverständnissen, Rückzug oder offenen Konflikten führen.
+Reibungslose Arbeitsabläufe, Selbstständigkeit, eine offene und vertrauensvolle Arbeitsatmosphäre, Kooperation, Leistungsfähigkeit, Innovation und Kreativität kennzeichnen ein gut funktionierendes Team.
 
-In der Teamsupervision bearbeiten wir konkrete Arbeitssituationen und die Zusammenarbeit im Team. Je nach Anlass stehen Fälle aus der Praxis, Kommunikation, Aufgabenverteilung, Führung oder berufliche Beziehungen im Mittelpunkt. Der organisatorische Kontext bleibt dabei immer im Blick.
+Im Laufe seiner Entwicklung kann jedes Team einmal Unterstützung von außen benötigen. Teams mit besonderen Belastungen in ihrer Arbeit können auch fortlaufend Supervision nutzen.
 
-## Ziel der Zusammenarbeit
+In der Teamsupervision kann es um die Arbeit mit dem Klientensystem und konkrete Fälle aus der Praxis gehen. In dieser Fallsupervision werden fachliche Fragen und unterschiedliche Sichtweisen gemeinsam reflektiert. Ebenso können Zusammenarbeit, Kommunikation, Arbeits- und Aufgabenverteilung, Fragen der Leitung und die Gestaltung beruflicher Beziehungen im Mittelpunkt stehen.
 
-Das Team soll seine Situation besser verstehen und wieder handlungsfähig werden. Dazu gehören klare Absprachen, ein konstruktiver Umgang mit Unterschieden und ein gemeinsames Bild davon, was gute Arbeit unter den gegebenen Bedingungen bedeutet.
+Dabei wird stets der gesamte Arbeitskontext in den Blick genommen. Der Übergang zur Organisationsberatung ist deshalb oft fließend.
 
-Teamsupervision stärkt fachliche Qualität, persönliche Entwicklung und Arbeitszufriedenheit – besonders dann, wenn Ergebnisse anschließend im Alltag überprüft und weiterentwickelt werden.
+## Fachliche Qualität und Arbeitsfähigkeit
+
+Ziel ist, alltägliche oder problematische Arbeitssituationen besser zu verstehen und wieder handlungsfähig zu werden. Dabei werden Fachwissen und Wertvorstellungen, Grundüberzeugungen und Handeln sowie Denken und Fühlen zusammengeführt.
+
+Teamsupervision kann zur fachlichen Qualifizierung und persönlichen Entwicklung der Teammitglieder beitragen sowie Arbeitszufriedenheit und Leistungsfähigkeit fördern.
 
 [Anliegen besprechen](/kontakt)

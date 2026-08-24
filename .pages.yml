@@ -9,12 +9,256 @@ settings:
       update: "Inhalt aktualisiert: {path}"
 
 content:
+  - name: home_page
+    label: Startseite
+    type: file
+    path: src/content/pages/home.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Seitentitel
+        type: string
+        required: true
+      - name: navTitle
+        label: Interner Kurztitel
+        type: string
+        required: true
+      - name: eyebrow
+        label: Text über dem Hero
+        type: string
+        required: true
+      - name: heroTexts
+        label: Texte im Hero
+        type: string
+        list: true
+        required: true
+      - name: body
+        label: Haupttext „Wie ich arbeite“
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+      - name: homeSections
+        label: Weitere Startseitenabschnitte
+        type: object
+        required: true
+        fields:
+          - name: hero
+            label: Hero
+            type: object
+            required: true
+            fields:
+              - name: titleBefore
+                label: Erste Titelzeile
+                type: string
+                required: true
+              - name: titleAccent
+                label: Hervorgehobener Titelteil
+                type: string
+                required: true
+              - name: titleAfter
+                label: Letzter Titelteil
+                type: string
+                required: true
+              - name: intro
+                label: Einführungstext
+                type: text
+                required: true
+              - name: primaryLabel
+                label: Text des Kontaktbuttons
+                type: string
+                required: true
+              - name: secondaryLabel
+                label: Text des Angebotslinks
+                type: string
+                required: true
+          - name: working
+            label: Einleitung
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Kurztitel
+                type: string
+                required: true
+              - name: title
+                label: Überschrift
+                type: string
+                required: true
+          - name: services
+            label: Angebote
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Kurztitel
+                type: string
+                required: true
+              - name: title
+                label: Überschrift
+                type: string
+                required: true
+              - name: linkLabel
+                label: Text des Übersichtslinks
+                type: string
+                required: true
+              - name: cards
+                label: Angebotskarten
+                type: object
+                required: true
+                fields:
+                  - name: leadership
+                    label: Führung
+                    type: object
+                    required: true
+                    fields:
+                      - name: title
+                        label: Titel
+                        type: string
+                        required: true
+                      - name: eyebrow
+                        label: Kurztitel
+                        type: string
+                        required: true
+                      - name: description
+                        label: Beschreibung
+                        type: text
+                        required: true
+                  - name: teamwork
+                    label: Teamsupervision
+                    type: object
+                    required: true
+                    fields:
+                      - name: title
+                        label: Titel
+                        type: string
+                        required: true
+                      - name: eyebrow
+                        label: Kurztitel
+                        type: string
+                        required: true
+                      - name: description
+                        label: Beschreibung
+                        type: text
+                        required: true
+                  - name: change
+                    label: Organisationsberatung
+                    type: object
+                    required: true
+                    fields:
+                      - name: title
+                        label: Titel
+                        type: string
+                        required: true
+                      - name: eyebrow
+                        label: Kurztitel
+                        type: string
+                        required: true
+                      - name: description
+                        label: Beschreibung
+                        type: text
+                        required: true
+                  - name: moderation
+                    label: Moderation
+                    type: object
+                    required: true
+                    fields:
+                      - name: title
+                        label: Titel
+                        type: string
+                        required: true
+                      - name: eyebrow
+                        label: Kurztitel
+                        type: string
+                        required: true
+                      - name: description
+                        label: Beschreibung
+                        type: text
+                        required: true
+          - name: profile
+            label: Profil
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Kurztitel
+                type: string
+                required: true
+              - name: title
+                label: Überschrift
+                type: string
+                required: true
+              - name: text
+                label: Text
+                type: text
+                required: true
+              - name: linkLabel
+                label: Text des Profillinks
+                type: string
+                required: true
+          - name: testimonial
+            label: Kundenstimme
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Kurztitel
+                type: string
+                required: true
+              - name: quote
+                label: Zitat ohne Anführungszeichen
+                type: text
+                required: true
+              - name: attribution
+                label: Name und Organisation
+                type: string
+                required: true
+              - name: linkLabel
+                label: Text des Übersichtslinks
+                type: string
+                required: true
+          - name: contact
+            label: Kontakt
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Kurztitel
+                type: string
+                required: true
+              - name: title
+                label: Überschrift
+                type: string
+                required: true
+              - name: text
+                label: Text
+                type: text
+                required: true
+              - name: buttonLabel
+                label: Text des Kontaktbuttons
+                type: string
+                required: true
+      - name: seoTitle
+        label: SEO-Titel
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: description
+        label: Kurzbeschreibung für Google
+        type: text
+        required: true
+        options:
+          maxlength: 180
+
   - name: main_pages
     label: Hauptseiten
     type: collection
     path: src/content/pages
     format: yaml-frontmatter
     subfolders: false
+    exclude: [home.md]
     operations:
       create: false
       delete: false
@@ -37,6 +281,10 @@ content:
       - name: eyebrow
         label: Text über der Überschrift
         type: string
+      - name: intro
+        label: Einleitung unter der Seitenüberschrift
+        type: text
+        description: Sichtbarer Einstiegstext; kann von der Google-Kurzbeschreibung abweichen.
       - name: heroTexts
         label: Wechselnde Hero-Texte
         type: string
@@ -95,6 +343,10 @@ content:
       - name: eyebrow
         label: Text über der Überschrift
         type: string
+      - name: intro
+        label: Einleitung unter der Seitenüberschrift
+        type: text
+        description: Sichtbarer Einstiegstext; kann von der Google-Kurzbeschreibung abweichen.
       - name: body
         label: Haupttext
         type: rich-text
@@ -150,6 +402,10 @@ content:
       - name: eyebrow
         label: Text über der Überschrift
         type: string
+      - name: intro
+        label: Einleitung unter der Seitenüberschrift
+        type: text
+        description: Sichtbarer Einstiegstext; kann von der Google-Kurzbeschreibung abweichen.
       - name: body
         label: Haupttext
         type: rich-text
@@ -174,7 +430,7 @@ content:
           maxlength: 180
 
   - name: news_pages
-    label: Unterseiten – Aktuelles
+    label: Unterseiten – Publikationen
     type: collection
     path: src/content/pages/aktuelles
     format: yaml-frontmatter
@@ -201,10 +457,14 @@ content:
         label: Titel in der Unternavigation
         type: string
         required: true
-        description: Erzeugt nur einen Eintrag unter „Aktuelles“, niemals im Hauptmenü.
+        description: Erzeugt nur einen Eintrag unter „Publikationen“, niemals im Hauptmenü.
       - name: eyebrow
         label: Text über der Überschrift
         type: string
+      - name: intro
+        label: Einleitung unter der Seitenüberschrift
+        type: text
+        description: Sichtbarer Einstiegstext; kann von der Google-Kurzbeschreibung abweichen.
       - name: body
         label: Haupttext
         type: rich-text
@@ -260,6 +520,10 @@ content:
       - name: eyebrow
         label: Text über der Überschrift
         type: string
+      - name: intro
+        label: Einleitung unter der Seitenüberschrift
+        type: text
+        description: Sichtbarer Einstiegstext; kann von der Google-Kurzbeschreibung abweichen.
       - name: body
         label: Haupttext
         type: rich-text

@@ -6,7 +6,13 @@ import Text from '../components/Text.astro';
 import Button from '../components/Button.astro';
 ---
 
-<BaseLayout title="Seite nicht gefunden | Meike Fabian" description="Die gewünschte Seite wurde nicht gefunden." section="legal">
+<BaseLayout
+  title="Seite nicht gefunden | Meike Fabian"
+  description="Die gewünschte Seite wurde nicht gefunden."
+  section="legal"
+  noindex={true}
+  includeStructuredData={false}
+>
   <Container class="py-28 text-center sm:py-40">
     <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent-text)]">Fehler 404</p>
     <Heading as="h1" class="mt-5">Diese Seite gibt es nicht.</Heading>

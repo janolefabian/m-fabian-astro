@@ -13,7 +13,9 @@ const entries = blocks.map((block) => {
 const phone = entries.find((entry) => entry.label.toLowerCase() === 'telefon');
 const email = entries.find((entry) => entry.label.toLowerCase() === 'e-mail');
 const otherEntries = entries.filter((entry) => entry !== phone && entry !== email);
-const phoneHref = phone ? `tel:${phone.value.replace(/[^+\d]/g, '')}` : undefined;
+const phoneNumber = phone?.value.replace(/[^+\d]/g, '');
+const internationalPhoneNumber = phoneNumber?.startsWith('0') ? `+49${phoneNumber.slice(1)}` : phoneNumber;
+const phoneHref = internationalPhoneNumber ? `tel:${internationalPhoneNumber}` : undefined;
 const emailHref = email ? `mailto:${email.value}` : undefined;
 ---
 

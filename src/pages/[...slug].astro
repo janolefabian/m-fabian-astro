@@ -1,15 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContentPage from '../components/ContentPage.astro';
 import NewsOverview from '../components/NewsOverview.astro';
 import SectionCards from '../components/SectionCards.astro';
 import TestimonialGrid from '../components/TestimonialGrid.astro';
 import ConnectionsGrid from '../components/ConnectionsGrid.astro';
+import articleCover from '../assets/images/aus-der-krise-fuehren-cover.png';
 
 export async function getStaticPaths() {
-  const pages = await getCollection('pages', ({ id }) => id !== 'home');
+  const pages = await getCollection('pages', ({ id, data }) => id !== 'home' && !data.draft);
   return pages.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
@@ -27,8 +29,23 @@ const sectionByDirectory = {
 } as const;
 const directory = entry.id.split('/')[0] as keyof typeof sectionByDirectory;
 const section = entry.data.section ?? sectionByDirectory[directory] ?? 'legal';
+const pageType = entry.id.startsWith('angebote/')
+  ? 'service'
+  : entry.id.startsWith('aktuelles/')
+    ? 'article'
+    : 'website';
+const usesArticleCover = entry.id === 'aktuelles/aus-der-krise-fuehren';
+const optimizedArticleCover = usesArticleCover
+  ? await getImage({ src: articleCover, width: articleCover.width, format: 'webp' })
+  : undefined;
+const socialImage = optimizedArticleCover?.src ?? entry.data.socialImage;
+const socialImageAlt = usesArticleCover
+  ? 'Titelblatt des Fachartikels „Aus der Krise führen“'
+  : entry.data.socialImageAlt;
 const variant = entry.id === 'ueber-mich/profil'
   ? 'profile'
+  : entry.id === 'angebote/fuehrung'
+    ? 'leadership'
   : entry.id === 'ueber-mich'
     ? 'hub-about'
     : entry.id === 'angebote'
@@ -46,15 +63,30 @@ const variant = entry.id === 'ueber-mich/profil'
       : 'default';
 ---
 
-<BaseLayout title={entry.data.seoTitle} description={entry.data.description} section={section}>
+<BaseLayout
+  title={entry.data.seoTitle}
+  schemaTitle={entry.data.title}
+  description={entry.data.description}
+  section={section}
+  image={socialImage}
+  imageAlt={socialImageAlt}
+  imageWidth={usesArticleCover ? articleCover.width : undefined}
+  imageHeight={usesArticleCover ? articleCover.height : undefined}
+  imageType={usesArticleCover ? 'image/webp' : undefined}
+  pageType={pageType}
+  publishedAt={entry.data.publishedAt}
+  updatedAt={entry.data.updatedAt}
+  authors={entry.data.authors}
+  noindex={entry.data.noindex}
+>
   <ContentPage
     title={entry.data.title}
     eyebrow={entry.data.eyebrow}
-    description={entry.data.description}
+    description={entry.data.intro ?? entry.data.description}
     section={section}
     secondColumn={entry.data.secondColumn}
     notice={entry.data.notice}
-    media={entry.id === 'angebote/fuehrung' ? 'leadership' : undefined}
+    media={entry.id === 'aktuelles/aus-der-krise-fuehren' ? 'article-cover' : undefined}
     variant={variant}
   >
     {entry.id === 'ueber-mich/kundenfeedback'

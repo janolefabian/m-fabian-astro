@@ -5,6 +5,7 @@ seoTitle: Impressum & Datenschutz | Meike Fabian
 description: Impressum und Hinweise zum Datenschutz für die Website von Meike Fabian.
 section: legal
 eyebrow: Rechtliche Informationen
+noindex: true
 notice: "Überprüfung erforderlich: Bitte lassen Sie Impressum und Datenschutzhinweise vor der Veröffentlichung rechtlich prüfen und ergänzen."
 order: 50
 ---
@@ -18,7 +19,7 @@ Krumme Straße 13
 Telefon: [0175 1759556](tel:+491751759556)  
 E-Mail: [info@m-fabian.de](mailto:info@m-fabian.de)
 
-**Berufsbezeichnungen:** Organisationsberaterin, Coach und Supervisorin (DGSv), Trainerin für Gruppen- und Organisationsdynamik (DGGO)
+**Berufsbezeichnungen:** Supervisorin und Coach (DGSv), Organisationsberaterin sowie Trainerin für Gruppen- und Organisationsdynamik (DGGO)
 
 ## Urheberrecht
 

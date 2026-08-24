@@ -1,15 +1,18 @@
 ---
-title: Angebote
+title: Coaching, Supervision & Organisationsberatung
 navTitle: Angebote
-seoTitle: Coaching, Supervision & Organisationsberatung | Meike Fabian
-description: Beratung für Führung, Teamarbeit, Veränderungsprozesse und Moderation – passend zu Ihrer konkreten Situation.
+seoTitle: Coaching, Supervision & Beratung in Detmold | Meike Fabian
+description: Coaching, Leitungssupervision, Teamsupervision, Organisationsberatung und Moderation für Führungskräfte, Teams und Organisationen.
 section: services
-eyebrow: Beratung, die ins Handeln führt
+eyebrow: Coaching · Supervision · Organisationsberatung · Moderation
+intro: Welches Format passt, richtet sich nach Anlass, Ziel, Beteiligten und dem organisatorischen Kontext.
 order: 20
 ---
 
-## Wenn bewährte Antworten nicht mehr ausreichen
+## Beratung für Führung, Zusammenarbeit und Veränderung
 
-Führung unter Druck, festgefahrene Teamkonflikte oder Veränderungen, die nicht in Bewegung kommen: In solchen Situationen hilft ein externer Blick, der Zusammenhänge sichtbar macht und zugleich handlungsnah bleibt.
+Ich arbeite mit Führungskräften, Teams, Arbeitsgruppen und Organisationen. Je nach Anlass kann das passende Format ein fokussiertes Coaching, Leitungs- oder Teamsupervision, eine längerfristige Organisationsberatung oder die Moderation einer Klausur, Tagung oder Großgruppe sein.
 
-Gemeinsam klären wir, was tatsächlich bearbeitet werden muss, wer beteiligt sein sollte und welches Format sinnvoll ist. Daraus entsteht ein Beratungsprozess, der zu Ihrer Organisation passt – vom fokussierten Coaching-Gespräch bis zur längerfristigen Begleitung.
+Zu Beginn klären wir Anlass, Ziel, Beteiligte und den organisatorischen Kontext. Die Vorgehensweise richtet sich nach dem Auftrag und wird im Verlauf gemeinsam überprüft.
+
+Meine Beratungs- und Trainingsfelder reichen von Organisationen der gesundheitlichen und sozialen Versorgung über Industrie, Dienstleistung und Behörden bis zur Kultur- und Medienbranche.

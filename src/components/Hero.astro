@@ -5,20 +5,38 @@ import Heading from './Heading.astro';
 import Button from './Button.astro';
 import portrait from '../assets/images/meike-fabian-wide.jpg';
 
-interface Props { eyebrow?: string; points?: string[] }
-const { eyebrow = 'Supervision · Coaching · Organisationsberatung', points = [] } = Astro.props;
+interface Props {
+  eyebrow?: string;
+  points?: string[];
+  titleBefore: string;
+  titleAccent: string;
+  titleAfter: string;
+  intro: string;
+  primaryLabel: string;
+  secondaryLabel: string;
+}
+const {
+  eyebrow = 'Supervision · Coaching · Organisationsberatung',
+  points = [],
+  titleBefore,
+  titleAccent,
+  titleAfter,
+  intro,
+  primaryLabel,
+  secondaryLabel,
+} = Astro.props;
 ---
 
-<section class="relative overflow-hidden border-b border-line bg-paper py-10 sm:py-12 lg:py-14">
+<section class="relative overflow-hidden border-b border-line bg-paper py-8 sm:py-12 lg:py-14">
   <Container>
     <div class="grid items-center gap-9 lg:grid-cols-[0.98fr_1.02fr] lg:gap-14 xl:gap-20">
       <div class="order-1">
         <p class="text-xs font-bold uppercase tracking-[0.2em] text-about-text">{eyebrow}</p>
-        <Heading as="h1" size="xl" class="mt-5 max-w-[12ch]">Klarheit gewinnen.<br /><em class="font-normal text-about-text">Zusammenarbeit</em> gestalten.</Heading>
-        <p class="mt-6 max-w-xl text-[1.05rem] leading-7 text-muted sm:text-lg sm:leading-8">Ich begleite Führungskräfte, Teams und Organisationen dabei, schwierige Situationen zu verstehen und tragfähige nächste Schritte zu entwickeln.</p>
+        <Heading as="h1" size="xl" class="mt-5 max-w-[12ch]">{titleBefore}<br /><em class="font-normal text-about-text">{titleAccent}</em> {titleAfter}</Heading>
+        <p class="mt-6 max-w-xl text-[1.05rem] leading-7 text-muted sm:text-lg sm:leading-8">{intro}</p>
         <div class="mt-7 flex flex-wrap gap-x-5 gap-y-3">
-          <Button href="/kontakt">Gespräch anfragen</Button>
-          <Button href="/angebote" variant="text">Angebote ansehen</Button>
+          <Button href="/kontakt">{primaryLabel}</Button>
+          <Button href="/angebote" variant="text">{secondaryLabel}</Button>
         </div>
       </div>
       <div class="order-2">

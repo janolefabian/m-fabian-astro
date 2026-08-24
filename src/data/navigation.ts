@@ -16,7 +16,7 @@ export const navigation: NavItem[] = [
       { label: 'Profil', href: '/ueber-mich/profil' },
       { label: 'Referenzen', href: '/ueber-mich/referenzen' },
       { label: 'Kundenfeedback', href: '/ueber-mich/kundenfeedback' },
-      { label: 'Verbindungen', href: '/ueber-mich/verbindungen' },
+      { label: 'Fachliche Netzwerke', href: '/ueber-mich/verbindungen' },
     ],
   },
   {
@@ -25,12 +25,12 @@ export const navigation: NavItem[] = [
     section: 'services',
     children: [
       { label: 'Führung', href: '/angebote/fuehrung' },
-      { label: 'Teamwork', href: '/angebote/teamwork' },
-      { label: 'Change', href: '/angebote/change' },
+      { label: 'Teamsupervision', href: '/angebote/teamwork' },
+      { label: 'Organisationsberatung', href: '/angebote/change' },
       { label: 'Moderation', href: '/angebote/moderation' },
     ],
   },
-  { label: 'Aktuelles', href: '/aktuelles', section: 'news' },
+  { label: 'Publikationen', href: '/aktuelles', section: 'news' },
   { label: 'Kontakt', href: '/kontakt', section: 'contact' },
 ];
 

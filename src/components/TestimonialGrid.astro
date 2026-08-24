@@ -18,7 +18,7 @@ const testimonials = [...body.matchAll(/^>\s*(.+)\n\n\*\*(.+)\*\*$/gm)].map((mat
     ]}>
       <blockquote class:list={[
         'font-display leading-[1.48] text-ink',
-        index === 0 ? 'text-[clamp(1.45rem,2.8vw,2.1rem)]' : 'text-[clamp(1.25rem,2vw,1.55rem)]',
+        index === 0 ? 'text-[clamp(1.25rem,2.5vw,1.9rem)]' : 'text-[clamp(1.18rem,1.8vw,1.45rem)]',
       ]}>{testimonial.quote}</blockquote>
       <figcaption class="mt-7 border-t border-[var(--accent)] pt-4 text-sm font-semibold leading-6 text-muted md:mt-8">
         {testimonial.attribution}

@@ -1,10 +1,11 @@
 ---
-title: Verbindungen
-navTitle: Verbindungen
-seoTitle: Fachliche Verbindungen | Meike Fabian
+title: Fachliche Netzwerke
+navTitle: Fachliche Netzwerke
+seoTitle: Fachliche Netzwerke | Meike Fabian
 description: Verbände, Institute und fachliche Netzwerke von Meike Fabian.
 section: about
 eyebrow: Fachlich verbunden
+intro: Fachverbände, Institute und Kolleginnen und Kollegen, mit denen ich fachlich verbunden bin.
 order: 14
 ---
 
@@ -28,12 +29,12 @@ Ausbildungsinstitut für Supervision, Coaching und beraterische Kompetenz.
 
 ### Ina Kramer
 
-Kollegiale Verbindung und gemeinsame fachliche Arbeit in Beratung und Supervision.
+Kollegiale Verbindung und gemeinsame Arbeit am Fachartikel „Aus der Krise führen“.
 
 [Website von Ina Kramer](https://www.ina-kramer.de)
 
 ### Klaus Junghans
 
-Kollegiale Verbindung und gemeinsame Veröffentlichungen zu Führung und Organisation.
+Kollegiale Verbindung und gemeinsame Arbeit am Fachartikel „Aus der Krise führen“.
 
 [Website von Klaus Junghans](https://www.supervision-lemgo.de)

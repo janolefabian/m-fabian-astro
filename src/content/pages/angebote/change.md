@@ -1,35 +1,32 @@
 ---
-title: Change
-navTitle: Change
-seoTitle: Veränderungsprozesse begleiten | Organisationsberatung
-description: Organisationsberatung für Veränderungsprozesse, die Orientierung schaffen, Widerstände verstehen und Beteiligte handlungsfähig machen.
+title: Organisationsberatung für Veränderungsprozesse
+navTitle: Organisationsberatung
+seoTitle: Organisationsberatung für Veränderung | Meike Fabian
+description: Organisationsberatung für Veränderungsprozesse, in denen Rollen, Beteiligung und der Umgang mit Widerstand geklärt werden.
 section: services
-eyebrow: Veränderung wird von Menschen getragen
+eyebrow: Organisationsentwicklung · Veränderungsbegleitung
+intro: Organisationsberatung nimmt die sachliche und soziale Seite von Veränderung sowie Beteiligung und Widerstand in den Blick.
 secondColumn: |-
-  Typische Situationen
+  Worum es gehen kann
 
-  • Strukturen und Zuständigkeiten werden neu geordnet
-  • Eine Strategie findet im Alltag keine Umsetzung
-  • Mitarbeitende reagieren mit Rückzug oder Widerstand
-  • Mehrere Teams müssen gleichzeitig neu zusammenfinden
-  • Leitung und Belegschaft bewerten die Lage unterschiedlich
-  • Nach einer Krise braucht es neue Orientierung
+  • Strukturelle Probleme verstehen
+  • Veränderungsprozesse initiieren
+  • Die gesamte Organisation einbeziehen
+  • Beteiligte in die Planung einbeziehen
+  • Widerstände rechtzeitig erkennen
+  • Mehrere Teams parallel begleiten
 order: 23
 ---
 
-## Veränderung braucht mehr als einen guten Plan
+## Die sachliche und die soziale Seite des Wandels
 
-Organisationen müssen sich laufend anpassen. Neue Strukturen, Führungspersonen oder strategische Ziele können notwendig sein – und dennoch Unsicherheit, Abwehr und Konflikte auslösen. Widerstand ist dabei nicht einfach ein Hindernis. Er enthält oft wichtige Hinweise auf ungeklärte Interessen, Erfahrungen und Risiken.
+Organisationen und Unternehmen sind immer wieder von Veränderung betroffen. Wenn strukturelle Probleme und die Initiierung von Veränderungsprozessen im Vordergrund stehen, kann eine Beratung der gesamten Organisation sinnvoll sein.
 
-Ich unterstütze Sie dabei, die sachliche und die soziale Seite des Wandels zusammenzubringen. Wir klären, was entschieden ist, wo Beteiligung möglich und nötig ist und welche Spannungen offen bearbeitet werden müssen.
+Veränderungen, die auf Dauer von den Beteiligten getragen werden sollen, gelingen nur mit den Menschen. Sie sind es, die neu entwickelte Ideen mit Leben füllen. Werden sie bei der Planung vergessen, sind Abwehr und Widerstand vorprogrammiert.
 
-## So entsteht tragfähige Bewegung
+## Widerstände rechtzeitig erkennen
 
-- Ausgangslage, Auftrag und relevante Beteiligte gemeinsam klären
-- Auswirkungen der Veränderung auf Rollen und Zusammenarbeit sichtbar machen
-- Dialogformate passend zur Organisation gestalten
-- Widerstände früh erkennen und konstruktiv beantworten
-- Entscheidungen, Zuständigkeiten und nächste Schritte verbindlich machen
+Für den Erfolg und die Nachhaltigkeit eines Veränderungsprozesses ist es von zentraler Bedeutung, Widerstände rechtzeitig zu erkennen und angemessen zu beantworten. Hier setzt meine Beratungsarbeit an.
 
 Bei komplexen Aufträgen, etwa wenn mehrere Teams gleichzeitig begleitet werden, kann der Prozess gemeinsam mit erfahrenen Kooperationspartnerinnen und -partnern durchgeführt werden.
 

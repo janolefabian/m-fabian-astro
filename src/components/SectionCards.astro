@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { section } = Astro.props;
-const pages = await getCollection('pages');
+const pages = await getCollection('pages', ({ data }) => !data.draft);
 const entries = new Map(pages.map((entry) => [`/${entry.id}`, entry]));
 const items = getSectionNavigation(section)
   .map((item) => ({ item, entry: entries.get(item.href) }))
@@ -23,7 +23,7 @@ const isServices = section === 'services';
     isServices ? 'text-services-text' : 'text-about-text',
   ]}>{isServices ? 'Vier Wege der Zusammenarbeit' : 'Mehr über Meike Fabian'}</p>
   <h2 id={`${section}-overview-heading`} class="mt-3 max-w-3xl font-display text-[clamp(1.85rem,3vw,2.65rem)] font-medium leading-tight text-ink">
-    {isServices ? 'Welches Anliegen passt zu Ihrer Situation?' : 'Erfahrung, Haltung und Zusammenarbeit'}
+    {isServices ? 'Welches Angebot passt zu Ihrem Anliegen?' : 'Erfahrung, Haltung und Zusammenarbeit'}
   </h2>
 
   <div class="mt-8 grid gap-5 md:grid-cols-2">

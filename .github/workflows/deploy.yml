@@ -24,7 +24,13 @@ jobs:
         uses: withastro/action@v6
         env:
           SITE_URL: https://janolefabian.github.io
-          BASE_PATH: /m-fabian-astro
+          BASE_PATH: /m-fabian-astro/
+          PUBLIC_PREVIEW_NOINDEX: "true"
+      - name: Indexierung und SEO-Ausgabe der Vorschau prüfen
+        run: npm run verify:preview
+        env:
+          SITE_URL: https://janolefabian.github.io
+          BASE_PATH: /m-fabian-astro/
 
   deploy:
     environment:

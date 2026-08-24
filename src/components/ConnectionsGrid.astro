@@ -22,7 +22,7 @@ const connections = body
 <div class="grid gap-5 md:grid-cols-2">
   {connections.map((connection, index) => (
     <article class:list={[
-      'flex min-h-64 flex-col justify-between rounded-3xl border border-line bg-paper p-6 sm:p-7',
+      'flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 sm:min-h-56 sm:rounded-3xl sm:p-7',
       index === connections.length - 1 && connections.length % 2 === 1 && 'md:col-span-2',
     ]}>
       <div>
@@ -31,8 +31,8 @@ const connections = body
         {connection.description && <p class="mt-4 max-w-2xl text-base leading-7 text-muted">{connection.description}</p>}
       </div>
       {connection.href && (
-        <a href={connection.href} target="_blank" rel="noreferrer" class="mt-7 inline-flex items-center gap-2 font-semibold text-ink no-underline hover:text-about-text">
-          {connection.label ?? 'Website besuchen'} <span aria-hidden="true">↗</span>
+        <a href={connection.href} target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex items-center gap-2 font-semibold text-ink no-underline hover:text-about-text">
+          {connection.label ?? 'Website besuchen'} <span aria-hidden="true">↗</span><span class="sr-only"> (öffnet in neuem Tab)</span>
         </a>
       )}
     </article>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  content: string;
+  class?: string;
+}
+
+const { content, class: className = '' } = Astro.props;
+const lines = content.split('\n').map((line) => line.trim()).filter(Boolean);
+const title = lines[0];
+const items = lines.slice(1);
+const isList = items.some((line) => line.startsWith('•'));
+---
+
+<aside class:list={['self-start border-t-2 border-[var(--accent)] pt-5', className]}>
+  {title && <h2 class="font-display text-[1.55rem] font-medium leading-tight text-ink">{title}</h2>}
+  {isList ? (
+    <ul class="mt-5 space-y-3 text-[0.98rem] leading-relaxed text-muted">
+      {items.map((item) => (
+        <li class="grid grid-cols-[0.65rem_1fr] gap-2.5">
+          <span aria-hidden="true" class="mt-[0.72em] h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+          <span>{item.replace(/^•\s*/, '')}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="mt-5 space-y-4 text-[0.98rem] leading-relaxed text-muted">
+      {content.split(/\n\s*\n/).slice(1).map((block) => <p class="whitespace-pre-line">{block}</p>)}
+    </div>
+  )}
+</aside>

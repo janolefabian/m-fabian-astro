@@ -3,40 +3,208 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { sectionColors, sectionTextColors } from '../data/navigation';
-import { withBase } from '../utils/paths';
+import { withBase, withoutBase } from '../utils/paths';
 
 interface Props {
   title: string;
   description: string;
   section?: keyof typeof sectionColors;
   image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageType?: string;
+  schemaTitle?: string;
+  pageType?: 'website' | 'article' | 'service';
+  publishedAt?: Date | string;
+  updatedAt?: Date | string;
+  authors?: string[];
+  noindex?: boolean;
+  includeStructuredData?: boolean;
 }
 
-const { title, description, section = 'home', image = '/images/meike-fabian.jpg' } = Astro.props;
+const {
+  title,
+  description,
+  section = 'home',
+  image,
+  imageAlt = 'Meike Fabian – Supervisorin, Coach und Organisationsberaterin',
+  imageWidth,
+  imageHeight,
+  imageType,
+  schemaTitle = title,
+  pageType = 'website',
+  publishedAt,
+  updatedAt,
+  authors = [],
+  noindex = false,
+  includeStructuredData = true,
+} = Astro.props;
 const siteUrl = Astro.site ?? Astro.url;
 const canonical = new URL(withBase(Astro.url.pathname), siteUrl);
-const socialImage = new URL(withBase(image), siteUrl);
+const defaultImage = '/images/meike-fabian.jpg';
+const usesDefaultImage = !image;
+const socialImage = new URL(withBase(image ?? defaultImage), siteUrl);
+const personImage = new URL(withBase(defaultImage), siteUrl);
+const homeUrl = new URL(withBase('/'), siteUrl);
+const profileUrl = new URL(withBase('/ueber-mich/profil'), siteUrl);
 const accent = sectionColors[section];
 const accentText = sectionTextColors[section];
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': ['Person', 'ProfessionalService'],
-  name: 'Meike Fabian',
-  url: new URL(withBase('/'), siteUrl).href,
-  image: socialImage.href,
-  email: 'mailto:info@m-fabian.de',
-  telephone: '+49 175 1759556',
-  jobTitle: 'Organisationsberaterin, Coach und Supervisorin',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Krumme Straße 13',
-    postalCode: '32756',
-    addressLocality: 'Detmold',
-    addressCountry: 'DE',
-  },
-  areaServed: 'Deutschland',
-  sameAs: ['https://www.dgsv.de', 'https://www.dggo.de'],
+const preventIndexing = noindex || import.meta.env.PUBLIC_PREVIEW_NOINDEX === 'true';
+const personId = `${homeUrl.href}#person`;
+const organizationId = `${homeUrl.href}#organization`;
+const websiteId = `${homeUrl.href}#website`;
+const webpageId = `${canonical.href}#webpage`;
+const imageId = `${socialImage.href}#primaryimage`;
+const toIsoDate = (value?: Date | string) => {
+  if (!value) return undefined;
+  const date = value instanceof Date ? value : new Date(value);
+
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 };
+const publishedAtIso = toIsoDate(publishedAt);
+const updatedAtIso = toIsoDate(updatedAt);
+const graph: Array<Record<string, unknown>> = [
+  {
+    '@type': 'Person',
+    '@id': personId,
+    name: 'Meike Fabian',
+    url: profileUrl.href,
+    image: personImage.href,
+    jobTitle: 'Supervisorin und Coach (DGSv), Organisationsberaterin',
+    memberOf: [
+      {
+        '@type': 'Organization',
+        name: 'Deutsche Gesellschaft für Supervision und Coaching e. V.',
+        url: 'https://www.dgsv.de',
+      },
+      {
+        '@type': 'Organization',
+        name: 'Deutsche Gesellschaft für Gruppendynamik und Organisationsdynamik e. V.',
+        url: 'https://www.dggo.de',
+      },
+    ],
+  },
+  {
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: 'Meike Fabian – Supervision und Coaching',
+    url: homeUrl.href,
+    image: personImage.href,
+    email: 'info@m-fabian.de',
+    telephone: '+491751759556',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Krumme Straße 13',
+      postalCode: '32756',
+      addressLocality: 'Detmold',
+      addressCountry: 'DE',
+    },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: homeUrl.href,
+    name: 'Meike Fabian – Supervision und Coaching',
+    inLanguage: 'de-DE',
+    publisher: { '@id': organizationId },
+  },
+  {
+    '@type': 'ImageObject',
+    '@id': imageId,
+    url: socialImage.href,
+    contentUrl: socialImage.href,
+    caption: imageAlt,
+  },
+];
+const webPage: Record<string, unknown> = {
+  '@type': 'WebPage',
+  '@id': webpageId,
+  url: canonical.href,
+  name: schemaTitle,
+  description,
+  isPartOf: { '@id': websiteId },
+  primaryImageOfPage: { '@id': imageId },
+  inLanguage: 'de-DE',
+};
+
+if (pageType === 'service') {
+  const serviceId = `${canonical.href}#service`;
+  webPage.mainEntity = { '@id': serviceId };
+  graph.push({
+    '@type': 'Service',
+    '@id': serviceId,
+    name: schemaTitle,
+    description,
+    url: canonical.href,
+    provider: { '@id': organizationId },
+  });
+}
+
+if (pageType === 'article') {
+  const articleId = `${canonical.href}#article`;
+  const article: Record<string, unknown> = {
+    '@type': 'Article',
+    '@id': articleId,
+    headline: schemaTitle,
+    description,
+    url: canonical.href,
+    mainEntityOfPage: { '@id': webpageId },
+    publisher: { '@id': organizationId },
+    inLanguage: 'de-DE',
+  };
+
+  article.image = { '@id': imageId };
+  if (publishedAtIso) article.datePublished = publishedAtIso;
+  if (updatedAtIso) article.dateModified = updatedAtIso;
+  if (authors.length > 0) {
+    article.author = authors.map((name) => name === 'Meike Fabian'
+      ? { '@id': personId }
+      : { '@type': 'Person', name });
+  }
+
+  webPage.mainEntity = { '@id': articleId };
+  graph.push(article);
+}
+
+graph.push(webPage);
+const breadcrumbLabels: Record<string, string> = {
+  'ueber-mich': 'Über mich',
+  angebote: 'Angebote',
+  aktuelles: 'Publikationen',
+  kontakt: 'Kontakt',
+  impressum: 'Impressum & Datenschutz',
+  agb: 'AGB',
+};
+const pathSegments = withoutBase(Astro.url.pathname).split('/').filter(Boolean);
+
+if (pathSegments.length > 0) {
+  const breadcrumbItems: Array<Record<string, unknown>> = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: homeUrl.href,
+    },
+  ];
+
+  pathSegments.forEach((segment, index) => {
+    const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: index === pathSegments.length - 1 ? schemaTitle : (breadcrumbLabels[segment] ?? segment),
+      item: new URL(withBase(path), siteUrl).href,
+    });
+  });
+
+  graph.push({
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical.href}#breadcrumb`,
+    itemListElement: breadcrumbItems,
+  });
+}
+const structuredData = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
 <!doctype html>
@@ -46,28 +214,35 @@ const structuredData = {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="robots" content={preventIndexing ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <meta name="theme-color" content={accent} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'} />
     <meta property="og:locale" content="de_DE" />
-    <meta property="og:site_name" content="Meike Fabian – Training und Beratung" />
+    <meta property="og:site_name" content="Meike Fabian – Supervision und Coaching" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="Meike Fabian – Organisationsberaterin, Coach und Supervisorin" />
+    <meta property="og:image:alt" content={imageAlt} />
+    {(imageWidth || usesDefaultImage) && <meta property="og:image:width" content={String(imageWidth ?? 1210)} />}
+    {(imageHeight || usesDefaultImage) && <meta property="og:image:height" content={String(imageHeight ?? 807)} />}
+    {(imageType || usesDefaultImage) && <meta property="og:image:type" content={imageType ?? 'image/jpeg'} />}
+    {pageType === 'article' && publishedAtIso && <meta property="article:published_time" content={publishedAtIso} />}
+    {pageType === 'article' && updatedAtIso && <meta property="article:modified_time" content={updatedAtIso} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {includeStructuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
   </head>
   <body>
     <a href="#main" class="sr-only z-50 bg-white p-3 text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Zum Inhalt</a>
     <Header pathname={Astro.url.pathname} />
-    <main id="main"><slot /></main>
+    <main id="main" tabindex="-1"><slot /></main>
     <Footer />
   </body>
 </html>

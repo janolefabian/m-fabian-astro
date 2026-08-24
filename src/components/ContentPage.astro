@@ -5,8 +5,10 @@ import SubNavigation from './SubNavigation.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { getSectionNavigation } from '../data/navigation';
-import conductor from '../assets/images/leadership-conductor.jpg';
+import portrait from '../assets/images/meike-fabian-portrait.jpg';
+import articleCover from '../assets/images/aus-der-krise-fuehren-cover.png';
 import ContactPanel from './ContactPanel.astro';
+import PageAside from './PageAside.astro';
 
 interface Props {
   title: string;
@@ -15,13 +17,13 @@ interface Props {
   section: string;
   secondColumn?: string;
   notice?: string;
-  media?: 'leadership';
-  variant?: 'default' | 'profile' | 'news' | 'contact' | 'hub-about' | 'hub-services' | 'references' | 'testimonials' | 'connections';
+  media?: 'article-cover';
+  variant?: 'default' | 'profile' | 'leadership' | 'news' | 'contact' | 'hub-about' | 'hub-services' | 'references' | 'testimonials' | 'connections';
 }
 
 const { title, eyebrow, description, section, secondColumn, notice, media, variant = 'default' } = Astro.props;
 const subnav = getSectionNavigation(section);
-const contentPages = await getCollection('pages');
+const contentPages = await getCollection('pages', ({ data }) => !data.draft);
 const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
 const sectionDirectories: Record<string, string> = {
   about: 'ueber-mich',
@@ -33,7 +35,7 @@ const sectionIndexItems = section === 'news' ? [{ label: 'Übersicht', href: '/a
 const configuredItems = [...sectionIndexItems, ...subnav.map((item) => ({
   ...item,
   label: labels.get(item.href.replace(/^\//, '')) ?? item.label,
-}))];
+})).filter((item) => labels.has(item.href.replace(/^\//, '')))];
 const configuredHrefs = new Set(configuredItems.map((item) => item.href));
 const sectionDirectory = sectionDirectories[section];
 const additionalItems = sectionDirectory
@@ -44,16 +46,14 @@ const additionalItems = sectionDirectory
       .sort((a, b) => a.label.localeCompare(b.label, 'de'))
   : [];
 const subnavItems = [...configuredItems, ...additionalItems];
-const sideLines = secondColumn?.split('\n').map((line) => line.trim()).filter(Boolean) ?? [];
-const sideTitle = sideLines[0];
-const sideItems = sideLines.slice(1);
-const isList = sideItems.some((line) => line.startsWith('•'));
 const isWide = ['hub-about', 'hub-services', 'references', 'testimonials', 'connections'].includes(variant);
 const isCustomGrid = ['testimonials', 'connections'].includes(variant);
+const showSubnav = subnavItems.length > 0 && !['hub-about', 'hub-services', 'news'].includes(variant);
+const isServiceDetail = section === 'services' && !['hub-services'].includes(variant);
 ---
 
 <PageHeader title={title} eyebrow={eyebrow} description={description} />
-{subnavItems.length > 0 && <SubNavigation items={subnavItems} currentPath={Astro.url.pathname} />}
+{showSubnav && <SubNavigation items={subnavItems} currentPath={Astro.url.pathname} />}
 
 <Container class="py-12 sm:py-14 lg:py-16">
   {notice && (
@@ -63,17 +63,34 @@ const isCustomGrid = ['testimonials', 'connections'].includes(variant);
   )}
 
   <article class:list={[
-    'mx-auto grid min-w-0 gap-12 lg:gap-16',
+    'mx-auto grid min-w-0 gap-10 sm:gap-12 lg:gap-16',
     secondColumn || media
       ? 'max-w-6xl lg:grid-cols-[minmax(0,1fr)_20rem]'
       : isWide
         ? 'max-w-6xl'
         : 'max-w-4xl',
   ]}>
+    {secondColumn && variant !== 'contact' && isServiceDetail && (
+      <PageAside content={secondColumn} class="lg:col-start-2 lg:row-start-1 lg:mt-2" />
+    )}
+
+    {variant === 'profile' && (
+      <figure class="mx-auto w-full max-w-[10.5rem] self-start overflow-hidden rounded-xl bg-paper sm:max-w-52 lg:col-start-2 lg:row-start-1 lg:mt-2 lg:max-w-none">
+        <Image
+          src={portrait}
+          alt="Porträt von Meike Fabian"
+          widths={[366, 600]}
+          sizes="(min-width: 1024px) 20rem, 100vw"
+          class="aspect-[3/4] w-full object-cover"
+        />
+      </figure>
+    )}
+
     <div class="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1">
       <div class:list={[
         !isCustomGrid && 'prose-fabian',
         variant === 'profile' && 'prose-profile',
+        variant === 'leadership' && 'prose-leadership',
         variant === 'contact' && 'prose-contact',
         (variant === 'hub-about' || variant === 'hub-services') && 'prose-hub',
         variant === 'references' && 'prose-references',
@@ -81,44 +98,32 @@ const isCustomGrid = ['testimonials', 'connections'].includes(variant);
       <slot name="after-content" />
     </div>
 
-    {media === 'leadership' && (
-      <figure class="order-first self-start overflow-hidden rounded-lg bg-paper lg:order-none lg:col-start-2 lg:row-start-1 lg:mt-2">
-        <Image
-          src={conductor}
-          alt="Dirigent in konzentrierter Führungssituation"
-          widths={[320, 480, 640]}
-          sizes="(min-width: 1024px) 20rem, 100vw"
-          loading="eager"
-          fetchpriority="high"
-          class="aspect-[4/3] w-full object-cover object-[center_42%]"
-        />
+    {media === 'article-cover' && (
+      <figure class="mx-auto w-full max-w-72 self-start lg:col-start-2 lg:row-start-1 lg:mt-2 lg:max-w-none">
+        <div class="overflow-hidden rounded-xl border border-line bg-white shadow-[0_22px_60px_-40px_rgba(23,33,37,0.5)]">
+          <Image
+            src={articleCover}
+            alt="Erste Seite des Fachartikels Aus der Krise führen"
+            widths={[360, 560]}
+            sizes="(min-width: 1024px) 20rem, 18rem"
+            class="w-full"
+          />
+        </div>
+        <figcaption class="mt-3 text-sm leading-6 text-muted">Erste Seite des Fachartikels „Aus der Krise führen“</figcaption>
       </figure>
     )}
 
     {secondColumn && variant === 'contact' && <ContactPanel content={secondColumn} />}
 
-    {secondColumn && variant !== 'contact' && (
-      <aside class:list={[
-        'self-start border-t-2 border-[var(--accent)] pt-5 lg:col-start-2',
-        variant === 'profile' && 'order-first lg:order-none',
-        media ? 'lg:row-start-2' : 'lg:row-start-1 lg:mt-2',
-      ]}>
-        {sideTitle && <h2 class="font-display text-[1.55rem] font-medium leading-tight text-ink">{sideTitle}</h2>}
-        {isList ? (
-          <ul class="mt-5 space-y-3 text-[0.98rem] leading-relaxed text-muted">
-            {sideItems.map((item) => (
-              <li class="grid grid-cols-[0.65rem_1fr] gap-2.5">
-                <span aria-hidden="true" class="mt-[0.72em] h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
-                <span>{item.replace(/^•\s*/, '')}</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div class="mt-5 space-y-4 text-[0.98rem] leading-relaxed text-muted">
-            {secondColumn.split(/\n\s*\n/).slice(1).map((block) => <p class="whitespace-pre-line">{block}</p>)}
-          </div>
-        )}
-      </aside>
+    {secondColumn && variant !== 'contact' && !isServiceDetail && (
+      <PageAside
+        content={secondColumn}
+        class={variant === 'profile'
+          ? 'lg:col-start-2 lg:row-start-2'
+          : media
+            ? 'lg:col-start-2 lg:row-start-2'
+            : 'lg:col-start-2 lg:row-start-1 lg:mt-2'}
+      />
     )}
   </article>
 </Container>

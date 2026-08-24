@@ -6,19 +6,30 @@ import { withBase, withoutBase } from '../utils/paths';
 interface Props { pathname: string }
 const { pathname: rawPathname } = Astro.props;
 const pathname = withoutBase(rawPathname);
-const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
-const contentPages = await getCollection('pages');
+const isCurrent = (href: string) => pathname === href;
+const isActive = (href: string) => isCurrent(href) || pathname.startsWith(`${href}/`);
+const contentPages = await getCollection('pages', ({ data }) => !data.draft);
 const labels = new Map(contentPages.map((entry) => [entry.id, entry.data.navTitle]));
+const publicHrefs = new Set(contentPages.map((entry) => `/${entry.id}`));
 const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\//, '')) ?? fallback;
+const submenuIdFor = (href: string) => `submenu-${href.replace(/^\//, '').replace(/\//g, '-')}`;
+const visibleNavigation = navigation
+  .filter((item) => publicHrefs.has(item.href))
+  .map((item) => ({
+    ...item,
+    children: item.children?.filter((child) => publicHrefs.has(child.href)),
+  }));
 ---
 
 <nav aria-label="Hauptnavigation" class="hidden lg:block">
   <ul class="flex items-start gap-8 xl:gap-11">
-    {navigation.map((item) => (
+    {visibleNavigation.map((item) => (
       <li class="group relative">
         <a
           href={withBase(item.href)}
-          aria-current={isActive(item.href) ? 'page' : undefined}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+          aria-haspopup={item.children ? 'true' : undefined}
+          aria-controls={item.children ? submenuIdFor(item.href) : undefined}
           class="relative block py-4 text-sm font-bold uppercase tracking-[0.12em] text-ink no-underline transition hover:text-[var(--nav-text)]"
           style={`--nav-color:${sectionColors[item.section]};--nav-text:${sectionTextColors[item.section]}`}
         >
@@ -28,13 +39,20 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
               isActive(item.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
             ]}
           ></span>
-          {labelFor(item.href, item.label)}
+          <span class="inline-flex items-center gap-2">
+            {labelFor(item.href, item.label)}
+            {item.children && (
+              <svg class="h-3 w-3 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="m2.25 4.25 3.75 3.5 3.75-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+          </span>
         </a>
         {item.children && (
-          <ul class="invisible absolute left-0 top-full z-30 min-w-52 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          <ul id={submenuIdFor(item.href)} class="invisible absolute left-0 top-full z-30 min-w-52 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
             {item.children.map((child) => (
               <li>
-                <a href={withBase(child.href)} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-text)]">
+                <a href={withBase(child.href)} aria-current={isCurrent(child.href) ? 'page' : undefined} class="block rounded-xl px-4 py-2 text-sm font-semibold text-ink no-underline hover:bg-paper hover:text-[var(--nav-text)]">
                   {labelFor(child.href, child.label)}
                 </a>
               </li>
@@ -46,19 +64,44 @@ const labelFor = (href: string, fallback: string) => labels.get(href.replace(/^\
   </ul>
 </nav>
 
-<details class="relative lg:hidden">
-  <summary class="flex min-h-11 cursor-pointer list-none items-center gap-3 rounded-full border border-line px-4 text-sm font-bold uppercase tracking-[0.12em] [&::-webkit-details-marker]:hidden">
-    <span class="grid gap-1" aria-hidden="true"><span class="h-px w-5 bg-ink"></span><span class="h-px w-5 bg-ink"></span></span>
+<details class="group relative lg:hidden">
+  <summary class="flex min-h-11 shrink-0 cursor-pointer list-none items-center gap-2 rounded-full border border-line px-3 text-xs font-bold uppercase tracking-[0.1em] min-[360px]:gap-3 min-[360px]:px-4 min-[360px]:text-sm min-[360px]:tracking-[0.12em] [&::-webkit-details-marker]:hidden">
+    <span class="relative h-4 w-5" aria-hidden="true">
+      <span class="absolute inset-x-0 top-1 h-px bg-ink transition duration-200 group-open:top-1/2 group-open:-translate-y-1/2 group-open:rotate-45"></span>
+      <span class="absolute inset-x-0 bottom-1 h-px bg-ink transition duration-200 group-open:top-1/2 group-open:bottom-auto group-open:-translate-y-1/2 group-open:-rotate-45"></span>
+    </span>
     Menü
   </summary>
   <nav aria-label="Mobile Navigation" class="absolute right-0 top-14 z-40 w-[min(21rem,calc(100vw-2.5rem))] rounded-3xl border border-line bg-white p-5 shadow-2xl">
     <ul class="space-y-1">
-      {navigation.map((item) => (
-        <li>
-          <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined} class="block rounded-xl px-3 py-2 text-lg font-semibold text-ink no-underline hover:bg-paper">{labelFor(item.href, item.label)}</a>
+      {visibleNavigation.map((item) => (
+        <li style={`--nav-color:${sectionColors[item.section]};--nav-text:${sectionTextColors[item.section]}`}>
+          <a
+            href={withBase(item.href)}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+            class:list={[
+              'block rounded-xl border-l-2 px-3 py-2 text-lg font-semibold no-underline transition-colors',
+              isActive(item.href)
+                ? 'border-[var(--nav-color)] bg-paper text-[var(--nav-text)]'
+                : 'border-transparent text-ink hover:bg-paper',
+            ]}
+          >{labelFor(item.href, item.label)}</a>
           {item.children && (
             <ul class="mb-3 border-l border-line pl-3">
-              {item.children.map((child) => <li><a href={withBase(child.href)} class="block px-3 py-1 text-sm text-muted no-underline hover:text-ink">{labelFor(child.href, child.label)}</a></li>)}
+              {item.children.map((child) => (
+                <li>
+                  <a
+                    href={withBase(child.href)}
+                    aria-current={isCurrent(child.href) ? 'page' : undefined}
+                    class:list={[
+                      'block rounded-lg px-3 py-1 text-sm no-underline transition-colors',
+                      isCurrent(child.href)
+                        ? 'bg-paper font-semibold text-[var(--nav-text)]'
+                        : 'text-muted hover:text-ink',
+                    ]}
+                  >{labelFor(child.href, child.label)}</a>
+                </li>
+              ))}
             </ul>
           )}
         </li>

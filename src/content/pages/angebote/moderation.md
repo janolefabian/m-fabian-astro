@@ -1,31 +1,34 @@
 ---
-title: Moderation
+title: Moderation für Klausuren, Konflikte & Großgruppen
 navTitle: Moderation
 seoTitle: Moderation für Klausuren, Konflikte & Großgruppen
-description: Professionelle Moderation für Strategieklausuren, Konfliktgespräche, Tagungen und Beteiligungsprozesse mit klaren Ergebnissen.
+description: Professionelle Moderation für Strategieklausuren, Konfliktgespräche, Tagungen, Beteiligungsprozesse und Großgruppen.
 section: services
-eyebrow: Gespräche strukturieren, Beteiligung ermöglichen
+eyebrow: Gespräche strukturieren · Beteiligung ermöglichen
+intro: Neutrale Moderation strukturiert komplexe Gespräche, macht Ideen zugänglich und unterstützt gemeinsam getragene Ergebnisse.
 secondColumn: |-
   Mögliche Formate
 
-  • Strategieklausuren und Workshops
-  • Konflikt- und Klärungsgespräche
-  • Konferenzen und Tagungen
+  • Besprechungen und Strategieklausuren
+  • Entscheidungen mit vielen Beteiligten
+  • Konkrete Konfliktsituationen
+  • Konferenzen, Kongresse und Tagungen
   • Podiumsdiskussionen
-  • Großgruppenveranstaltungen
   • Open Space, World Café und Zukunftswerkstatt
 order: 24
 ---
 
-## Wenn viele Perspektiven zu einer gemeinsamen Richtung werden sollen
+## Neutrale Leitung für komplexe Gespräche
 
-Manche Gespräche brauchen eine neutrale Leitung: weil eine Entscheidung ansteht, viele Menschen beteiligt werden sollen oder ein Konflikt die sachliche Arbeit überlagert. Gute Moderation sorgt dafür, dass relevante Stimmen gehört werden und die Gruppe dennoch bei ihrem Auftrag bleibt.
+Manchmal benötigt eine Organisation, ein Unternehmen oder eine Arbeitsgruppe eine neutrale Gesprächsbegleitung für ein zeitlich begrenztes Zusammentreffen. Das kann bei anstehenden Entscheidungen mit vielen Beteiligten, in konkreten Konfliktsituationen oder bei Veränderungswünschen sinnvoll sein.
 
-Vorab klären wir Ziel, Teilnehmende, Entscheidungsspielräume und mögliche Spannungsfelder. Auf dieser Grundlage entsteht ein Ablauf, der Orientierung gibt, ohne wichtige Beiträge abzuschneiden.
+Das Anliegen, die Zahl der Teilnehmenden und die weiteren Rahmenbedingungen entscheiden über die Auswahl der Methode.
 
-## Von der Diskussion zum Ergebnis
+## Formate und Methoden
 
-Moderation macht Ideen sichtbar, strukturiert Unterschiede und hält Entscheidungen nachvollziehbar fest. Die Methode folgt dabei dem Anliegen – nicht umgekehrt. Je nach Situation kommen klassische Moderationsverfahren, dialogische Formate oder Großgruppenmethoden wie Open Space, World Café und Zukunftswerkstatt zum Einsatz.
+Moderation macht Ideen allen zugänglich, fördert die Kreativität der Teilnehmenden und unterstützt die Gruppe dabei, gemeinsam zu Ergebnissen und Entscheidungen zu gelangen. So kann die Verantwortung für die Ergebnisse gemeinsam getragen werden.
+
+Neben klassischen Moderationsverfahren können insbesondere in Entwicklungsprozessen Großgruppenmethoden wie Open Space, World Café und Zukunftswerkstatt zum Einsatz kommen.
 
 Sie können mich für Besprechungen, Strategieklausuren, Konferenzen, Kongresse, Tagungen, Podiumsdiskussionen und Beteiligungsprozesse anfragen.
 
